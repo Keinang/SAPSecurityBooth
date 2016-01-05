@@ -1,0 +1,17 @@
+{
+  "name": "meanstarterkit",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Danish21/meanstarterkit",
+  "authors": [
+    "Danish Noorani <daninoorani21@gmail.com>"
+  ],
+  "description": "starter kit for mean stack application",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-animate": "~1.4.3",
+    "angular-resource": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-toastr": "~1.4.1"
+  }
+}
