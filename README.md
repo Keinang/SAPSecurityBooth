@@ -10,3 +10,6 @@ Usage:
 
 4) run 'node server.js'
 
+5) Goto 'http://localhost:3000/#/login'
+
+* Predfined user - email: a@a.com password: a
