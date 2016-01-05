@@ -11,18 +11,5 @@
 5) Goto `http://localhost:3000/#/login`    
 6) Predfined user - `email: a@a.com password: a`  
 
-### Deploy to bluemix
-
-#### One time installation
-
-1) `cf login -a api.ng.bluemix.net -u keinan.gilad@gmail.com -o keinan.gilad@gmail.com -s dev`    
-2) `cf create-service mongodb 100 mean-mongo`  
-3) `git clone https://github.com/meanjs/mean.git && cd mean`  
-4) `npm install`  
-5) `grunt build`
-
-#### Every time
-
-1) `cf login -a api.ng.bluemix.net -u keinan.gilad@gmail.com -o keinan.gilad@gmail.com -s dev`    
-2) `cf push`
+### Deploy to cloud
 
