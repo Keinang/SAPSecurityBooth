@@ -1,5 +1,16 @@
 {
   "name": "sap-security-booth-dkom-16",
+  "version": "1.0.0",
+  "description": "A security fun challange for the SAP DKOM at Israel, 2016.",
+  "keywords": [
+    "security",
+    "sap",
+    "heroku"
+  ],
+  "author": "keinang",
+  "engines": {
+    "node": "4.2.2"
+  },
   "main": "server.js",
   "dependencies": {
     "express": "~4.0.0",
