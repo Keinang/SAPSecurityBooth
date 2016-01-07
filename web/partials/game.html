@@ -1,0 +1,72 @@
+<!-- Timer -->
+<div class="row" xmlns="http://www.w3.org/1999/html">
+    <div class="col-sm-6 col-sm-offset-3 digits"/>
+</div>
+
+<br/>
+<br/>
+
+<!-- Challenge -->
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 whiteBackground">
+        <br/>
+
+        <div ng-hide="user.game.level !== 6">
+            <h1>You finished the game!!!</h1>
+
+            <p>Go look at the scoreboard</p>
+        </div>
+        <div ng-hide="user.game.level == 6">
+
+            <h1>Level: {{user.game.level}}</h1>
+            <br/>
+
+            <h2>{{user.game.question}}</h2>
+            <br/>
+            <br/>
+
+            <form ng-submit="submitAnswer()">
+                <input type="text" name="field" ng-model="answerInput"/>
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </form>
+            <br/>
+            <button ng-click="toggleForgetPassword()" class="btn btn-default" ng-hide="user.game.level !== 2">Forgot
+                Password
+            </button>
+            <div ng-hide="user.game.level !== 2 || forgetPassword == false">
+                <h2>Forgot your password?</h2>
+
+                <p>Please answer your security question</p>
+
+                <p>This will help us verify your identity</p>
+
+                <p><b>What is my favourite baseball team?</b></p>
+            </div>
+            <br/>
+            <br/>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<!-- --------------------------------------------------------------------- -->
+<!-- Bank door code is: 271083, shhh tell no one!                       -->
+<!-- --------------------------------------------------------------------- -->
+<br/>
+<br/>
+<!-- For Debug -->
+<div class="row" ng-hide="isDebug == false">
+    <div class="col-sm-6 col-sm-offset-3 whiteBackground">
+        <br/>
+
+        <h1>Debugging Info</h1>
+        <br>Name: {{user.firstName}} {{user.lastName}}</br>
+        <br>Email: {{user.local.email}}</br>
+        <br>Score: {{user.game.score}}</br>
+        <br>Level: {{user.game.level}}</br>
+        <br>Timer: {{user.game.timeEnd}}</br>
+        <br>Question: {{user.game.question}}</br>
+        <br>Hints: {{user.game.hints}}</br>
+        <br/>
+    </div>
+</div>

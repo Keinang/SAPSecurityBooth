@@ -1,12 +1,25 @@
-<br>
-<br>
+<br/>
+<br/>
+
+<!-- User Info -->
 <div class="row">
-	<div class="col-sm-6 col-sm-offset-3 whiteBackground">
-		<br>
-		<br>
-		<h1>Email: {{user.local.email}}</h1>
-		<br>
-		<br>
-		{{$root.currentUser}}
-	</div>
+    <div class="col-sm-6 col-sm-offset-3 whiteBackground">
+        <br/>
+        <!-- Info -->
+        <h1>Profile</h1>
+        <br>Name: {{user.firstName}} {{user.lastName}}
+        <br>Email: {{user.local.email}}
+        <br>Level: {{user.game.level}}
+        <br>Score: {{user.game.score}}
+        <br>Timer: {{user.game.timeEnd}}
+        <br>
+    </div>
+</div>
+
+<br/>
+<br/>
+
+<!-- Start to begin -->
+<div class="row ">
+    <a class="button-start col-sm-6 col-sm-offset-3" href="#/game">START</a>
 </div>
