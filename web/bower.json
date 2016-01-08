@@ -1,12 +1,12 @@
 {
-  "name": "meanstarterkit",
+  "name": "sap-security-booth-dkom-16",
   "version": "1.0.0",
-  "homepage": "https://github.com/Danish21/meanstarterkit",
+  "homepage": "https://github.wdf.sap.corp/i305845/SecurityBooth",
   "authors": [
-    "Danish Noorani <daninoorani21@gmail.com>"
+    "Keinan Gilad <i305845@sap.com>"
   ],
-  "description": "starter kit for mean stack application",
-  "license": "MIT",
+  "description": "Security booth application",
+  "license": "SAP",
   "dependencies": {
     "angular": "~1.4.3",
     "angular-animate": "~1.4.3",
