@@ -68,7 +68,7 @@ angular.module('appname.controllers', [])
                 $scope.user = result.user;
                 if (result.status === 'OK') {
                     // Send usage analytics:
-                    ga('set', 'pageview', '/game' + result.user.game.level + '.html');
+                    ga('send', 'pageview', '/game' + result.user.game.level + '.html');
 
                     if (reRenderDigits) {
                         result.user.game.timeEnd = new Date(result.user.game.timeEnd);
