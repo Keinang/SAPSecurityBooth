@@ -67,6 +67,9 @@ angular.module('appname.controllers', [])
             gameService.getUserInfo().then(function (result) {
                 $scope.user = result.user;
                 if (result.status === 'OK') {
+                    // Send usage analytics:
+                    ga('set', 'pageview', '/game' + result.user.game.level + '.html');
+
                     if (reRenderDigits) {
                         result.user.game.timeEnd = new Date(result.user.game.timeEnd);
                         showDigits(result.user.game.timeEnd, toastr);
