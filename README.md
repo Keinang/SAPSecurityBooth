@@ -42,4 +42,5 @@ dbuser, dbpassword known to me only, also login to my account setting is known t
 Basic usage of Heroku is free. Each app you create has free access to 750 dyno-hours per month.   
 WebSite - `https://dashboard.heroku.com/apps`    
 I created an account and deployed from there.   
-The deployment is from other cloned git, because SAP's github is not recognized there. (manually step to copy-paste)  
+The deployment is from other cloned git, because SAP's github is not recognized there. 
+(manually step to copy-paste - Don't override the database.js)!!!    
