@@ -24,7 +24,7 @@ module.exports = function (app, passport) {
         '1': ['Did you check to whom the forgotten password question was sent?', 'Use social engineering knowledge to discover the password.', 'Did you read Hasso\'s wikipedia page?'],
         '2': ['Did you try to hover all content in the page?'],
         '3': ['Can you understand the encryption method?', 'Try to decode it and find the biggest value.', 'base64 would be useful here.'],
-        '4': ['If you post it...It will come....', 'Try to tamper the data as the way you need.'],
+        '4': ['If you post it...It will come....', 'Try to tamper with the data as needed.'],
         '5': ['What is common to Oreo, chocolate chips and what grandmothers give to their grandsons?', 'Can you change the value of the cookie?', 'The cookie key is isAdmin']
     };
 
@@ -168,9 +168,7 @@ module.exports = function (app, passport) {
                 responseWrapper(response, res, 'ERROR', 'Something Went Wrong - no user found', user);
                 return;
             }
-
             setGameLevelDetails(user);
-            //setHint(user);
             if (user.game && user.game.timeEnd && (user.game.timeEnd - new Date() < 0)) {
                 responseWrapper(response, res, 'ERROR', 'Times up!', user);
             } else {
@@ -225,6 +223,8 @@ module.exports = function (app, passport) {
                 return;
             }
             setHint(user);
+            setGameLevelDetails(user);
+
             user.save();
             response.user = user;
             responseWrapper(response, res, 'OK', 'Game Hints Returned', user);

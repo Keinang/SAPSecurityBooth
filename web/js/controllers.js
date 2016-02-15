@@ -105,7 +105,6 @@ angular.module('appname.controllers', ['ngAnimate'])
             profileService.getUserInfo().then(function (result) {
                 if (result.status === 'OK') {
                     $scope.user = result.user;
-                    //setUiHints($scope, $timeout);
                 }
             });
         };
@@ -493,7 +492,7 @@ angular.module('appname.controllers', ['ngAnimate'])
         $scope.getUserInfo = function (reRenderDigits) {
             gameService.getUserInfo().then(function (result) {
                 $scope.user = result.user;
-                setUiHints($scope, $timeout);
+                setUiHints($scope);
                 if (result.status === 'OK') {
                     // Send usage analytics:
                     ga('send', 'pageview', '/game' + result.user.game.level + '.html');
@@ -535,7 +534,7 @@ angular.module('appname.controllers', ['ngAnimate'])
         $scope.getHint = function () {
             gameService.getHint().then(function (result) {
                 $scope.user = result.user;
-                setUiHints($scope, $timeout);
+                setUiHints($scope);
             })
         };
 
@@ -550,8 +549,7 @@ angular.module('appname.controllers', ['ngAnimate'])
                 gameService.transfer(data).then(function (result) {
                     if (result.status === 'OK') {
 
-                        $location.path('api/transferMoney');
-                        toastr.success('Great Success!');
+                        toastr.success('Great Success! Check response for confirmation key to proceed');
                     }
                     else if (result.status === 'idle') {
                         toastr.success('Money successfully transferred!');
@@ -605,7 +603,7 @@ function showDigits(userTimeEnd, toastr) {
     });
 }
 
-function setUiHints(scope, timeout) {
+function setUiHints(scope) {
     scope.isHintDisabled = !scope.user.game.hasMoreHints;
 }
 
