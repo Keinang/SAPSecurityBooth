@@ -2,36 +2,38 @@ module.exports = function (app, passport) {
     var user = require('../app/models/user');
 
     var TIME_PLAY_IN_MINUTES = 15;
+    var ch4ExpectedMoney = 1000000;
+    var ch4ExpectedAccount = 424242;
     var Answers = {
-        '1': '271083',
-        '2': 'San Jose Sharks',
-        '3': '3',
-        '4': '4',
-        '5': '5'
+        '1': 'San Jose Sharks',
+        '2': '271083',
+        '3': 'Carlos Slim', // https://www.base64encode.org/
+        '4': 'n00b',
+        '5': '5555555' // solution: document.cookie="isAdmin=true"
     };
 
     var Questions = {
-        '1': "The bank is closed today. Your mission is to find the Bank's door lock code",
-        '2': "You want to deliver money to your account. Login as the Bank owner, Hasso Plattner. Your mission is to find Hasso's password",
-        '3': '3 question',
-        '4': '4 question',
-        '5': '5 question'
+        '1': "You entered the bank. Log in as Hasso Plattner.",
+        '2': "Inside the bank there is an internal computer to transfer funds inside a locked room. Your mission is to find the door lock code hidden somewhere.",
+        '3': "You found the bank account information file, but unfortunately it is not readable. You need to find the richest account name.",
+        '4': 'Transfer 1 Million dollars to your account number: 424242',
+        '5': 'Remove the transfers log from the server.'
     };
 
     var Hints = {
-        '1': ['A simple challenge, involving an to fill a password hidden. Requirements: Common sense.', 'View source'],
-        '2': ['A slightly more difficult challenge, involving social engineering. Requirements: Common sense.'],
-        '3': ['hint 3'],
-        '4': ['hint 4'],
-        '5': ['hint 5']
+        '1': ['Did you check to whom the forgotten password question was sent?', 'Use social engineering knowledge to discover the password.', 'Did you read Hasso\'s wikipedia page?'],
+        '2': ['Did you try to hover all content in the page?'],
+        '3': ['Can you understand the encryption method?', 'Try to decode it and find the biggest value.', 'base64 would be useful here.'],
+        '4': ['If you post it...It will come....', 'Try to tamper the data as the way you need.'],
+        '5': ['What is common to Oreo, chocolate chips and what grandmothers give to their grandsons?', 'Can you change the value of the cookie?', 'The cookie key is isAdmin']
     };
 
     var LevelScore = {
-        1: 100,
-        2: 1000,
-        3: 1000,
-        4: 1000,
-        5: 10000
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5
     };
 
 // LOGOUT ==============================
@@ -136,7 +138,12 @@ module.exports = function (app, passport) {
 
             var response = {};
             response.status = 'OK';
-            response.users = users;
+            var byScore = users.slice(0);
+            byScore.sort(function (a, b) {
+                return b.game.score - a.game.score;
+            });
+
+            response.users = byScore;
             res.json(200, response);
         });
     });
@@ -163,7 +170,7 @@ module.exports = function (app, passport) {
             }
 
             setGameLevelDetails(user);
-
+            //setHint(user);
             if (user.game && user.game.timeEnd && (user.game.timeEnd - new Date() < 0)) {
                 responseWrapper(response, res, 'ERROR', 'Times up!', user);
             } else {
@@ -179,18 +186,79 @@ module.exports = function (app, passport) {
         user.findOne({_id: user_id}, function (error, user) {
             var response = {};
             if (error) {
+                responseWrapper(response, res, 'ERROR', 'Something went wrong - no user found');
+                return;
+            }
+            var isRight = (req.query) && checkAnswer(req.query.answer, req.cookies, user.game.level, user);
+
+            response.user = user;
+            if (isRight) {
+                // Reached level 5:
+                if (user.game.level === 5) {
+                    // Set cookie for level 5
+                    res.cookie('isAdmin', 'false');
+                }
+                // Reached level 6:
+                if (user.game.level === 6) {
+                    // Clear cookie for level 6
+                    res.clearCookie('isAdmin');
+                }
+                responseWrapper(response, res, 'OK', 'Good answer', user);
+            } else {
+                var message = 'Wrong answer';
+                if (user.game.level === 5) {
+                    message = 'Access denied! Only administrators can delete the log';
+                }
+                responseWrapper(response, res, 'ERROR', message, user);
+            }
+        });
+    });
+
+    app.get('/api/getHint', isLoggedIn, function (req, res) {
+        var user_id = req.user._id;
+
+        // Find user:
+        user.findOne({_id: user_id}, function (error, user) {
+            var response = {};
+            if (error) {
                 responseWrapper(response, res, 'ERROR', 'Something Went Wrong - no user found');
                 return;
             }
-
-            var isRight = (req.query) && checkAnswer(req.query.answer, user.game.level, user);
+            setHint(user);
+            user.save();
             response.user = user;
-            if (isRight) {
-                responseWrapper(response, res, 'OK', 'Good answer', user);
-            } else {
-                responseWrapper(response, res, 'ERROR', 'Wrong answer', user);
-            }
+            responseWrapper(response, res, 'OK', 'Game Hints Returned', user);
         });
+    });
+
+    app.post('/api/transferMoney', function (req, res) { //Utilizing custom callback to send json objects
+        var response = {};
+
+        if (req.body.accountNumber == ch4ExpectedAccount) {
+            if (req.body.amount == ch4ExpectedMoney) {
+                //setUserScoreAndLevel(user);
+                response.status = 'OK';
+                response.message = 'You transferred 1M$! add the confirmation key to proceed to level 5... ';
+                response.confirmationKey = Answers['4'];
+                return res.json(200, response);
+            } else {
+                // wrong money
+                response.status = 'ERROR';
+                response.message = 'Your account number is good, but you should transfer 1M$....';
+                return res.json(200, response);
+            }
+        } else if (req.body.amount == ch4ExpectedMoney) {
+            // wrong account
+            response.status = 'ERROR';
+            response.message = 'Sending 1M$... ERROR! Account does not exist...';
+            return res.json(200, response);
+        } else {
+            // the user didn't change anything...
+            response.status = 'ERROR';
+            response.message = 'Successfully transfer money to ' + req.body.accountNumber + ' account...';
+            return res.json(200, response);
+        }
+
     });
 
     function setGameLevelDetails(user) {
@@ -198,9 +266,23 @@ module.exports = function (app, passport) {
         if (user.game === undefined || user.game.timeEnd === undefined) {
             initUserGameClock(user);
         }
-
-        user._doc.game.hints = Hints[user.game.level];
         user._doc.game.question = Questions[user.game.level];
+    }
+
+    function setHint(user) {
+        var allHints = Hints[user.game.level];
+        var usedHints = user.game.hints;
+
+        if (usedHints.length < allHints.length) {
+            // Set the additional hint
+            usedHints.push(allHints[usedHints.length]);
+        }
+        // Set hints status
+        if (usedHints.length < allHints.length) {
+            user.game.hasMoreHints = true;
+        } else {
+            user.game.hasMoreHints = false;
+        }
     }
 
     function initUserGameClock(user) {
@@ -208,29 +290,55 @@ module.exports = function (app, passport) {
             level: 1,
             score: 0,
             timeEnd: new Date(new Date().getTime() + TIME_PLAY_IN_MINUTES * 60000),
+            timeStart: new Date(),
             hints: [],
+            hasMoreHints: true,
             question: ''
         };
         user.save();
     }
 
-    function checkAnswer(answer, level, user) {
-        var isCorrect = (Answers[level].toLowerCase() == answer.toLowerCase());
+    function checkAnswer(answer, cookies, level, user) {
+        var isCorrect;
+        if (user.game.level == 5) {
+            isCorrect = (cookies.isAdmin === 'true');
+        } else {
+            isCorrect = (Answers[level].toLowerCase() == answer.toLowerCase());
+        }
         if (isCorrect) {
             // set level:
-            user.game.level = user.game.level + 1;
-
-            // set score:
-            var diffMs = (user.game.timeEnd - new Date());
-            var diffMins = diffMs < 0 ? 0 : Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
-            var scoreFactor = LevelScore[user.game.level];
-            scoreFactor = Number.isInteger(scoreFactor) ? scoreFactor : 0;
-            user.game.score += diffMins * scoreFactor;
-
-            // save:
-            user.save();
+            setUserScoreAndLevel(user);
         }
         return isCorrect;
+    }
+
+    function setUserScoreAndLevel(user) {
+        user.game.level = user.game.level + 1;
+
+        // set score:
+        var diffMs = (user.game.timeEnd - new Date());
+        var diffMins = diffMs < 0 ? 0 : Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+        var scoreFactor = LevelScore[user.game.level];
+        scoreFactor = Number.isInteger(scoreFactor) ? scoreFactor : 0;
+
+        // Hint factor
+        var hintFactor = 1;
+        if (user.game.hints.length > 0) {
+            hintFactor = 1 - ((user.game.hints.length + 1) * 0.1);
+        }
+        user.game.score += diffMins * scoreFactor * hintFactor;
+
+        // Clear hints for next level
+        user.game.hints = [];
+        user.game.hasMoreHints = true;
+
+        // if user finished the game, we set the time:
+        if (user.game.level == 6) {
+            user.game.timeUserFinished = new Date();
+        }
+
+        // save:
+        user.save();
     }
 };
 

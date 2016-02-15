@@ -83,6 +83,24 @@ angular.module('appname.services', [])
                     result = ulhttp.handleError(result);
                     return result;
                 });
+            },
+
+            getHint: function (data) {
+                var url = "/api/getHint";
+                return ulhttp.get(url, data).then(function (result) {
+                    result = ulhttp.handleError(result);
+                    return result;
+                });
+
+            },
+
+            transfer: function (data) {
+                // Content-Type: application/x-www-form-urlencoded
+                var url = "/api/transferMoney";
+                return ulhttp.post(url, data).then(function (result) {
+                    result = ulhttp.handleError(result);
+                    return result;
+                });
             }
         };
     }).factory('leaderboardService', function (ulhttp) {

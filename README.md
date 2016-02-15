@@ -25,6 +25,9 @@
       $set: { "game.level": "1" }   
     }   
 )`  
+update timestamp of a user - 
+`db.users.update({"lastName" : "a"}, { $set: {"game.timeEnd":  "new Date(new Date().getTime() + -15 * 60000) " }})`
+
 4) other commands:   
 `db.users.find()`     
 `db.dropDatabase()`      
@@ -44,3 +47,14 @@ WebSite - `https://dashboard.heroku.com/apps`
 I created an account and deployed from there.   
 The deployment is from other cloned git, because SAP's github is not recognized there. 
 (manually step to copy-paste - Don't override the database.js)!!!    
+
+
+### To debug
+1) Download WebStorm - `https://www.jetbrains.com/webstorm/download/#section=windows-version`
+2) In WebStorm press `Run` -> `Edit Configuration`
+3) Press the `+` sign and choose `Node.js`
+4) 	In `Node interpreter` it should be `C:\Program Files\nodejs\node.exe` (or where the nodeJs is installed)
+	In `Working Directory` make sure you have the path to the project
+	In `JavaScript file` choose `server.js` (it's in the securityBooth project folder)
+5) Go to tab `Browser/Live Edit` and makse sure `After launch` is not selected.
+6) Run `Debug`

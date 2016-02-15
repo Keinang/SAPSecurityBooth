@@ -24,10 +24,26 @@ angular.module('summerproject', ['ngRoute', 'ngResource', 'appname.controllers',
                 templateUrl: 'partials/game.html',
                 controller: 'gameCtrl',
                 resolve: {logincheck: checkLogin}
-            }).when('/leaderboard', {
+            })
+            .when('/leaderboard', {
                 title: 'Leaderboard',
                 templateUrl: 'partials/leaderboard.html',
                 controller: 'leaderboardCtrl'
+            })
+            .when('/leaderboard2', {
+                title: 'Leaderboard2',
+                templateUrl: 'partials/leaderboard2.html',
+                controller: 'leaderboard2Ctrl'
+            })
+            .when('/about', {
+                title: 'About',
+                templateUrl: 'partials/about.html',
+                controller: 'aboutCtrl'
+            })
+            .when('/help', {
+                title: 'Help',
+                templateUrl: 'partials/help.html',
+                controller: 'helpCtrl'
             })
             .otherwise({redirectTo: '/login'});
     }]).

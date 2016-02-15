@@ -1,0 +1,165 @@
+<br/>
+<br/>
+
+<div class="row">
+    <div id="catchMeDiv" class="catch-me-top-div">
+        <div class="green"></div>
+        <div class="catch-me-img-div"><img src="img/catch-me.png" style="z-index: 50"></div>
+        <div class="blue"></div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="row text-center">
+            <h1 style="color:greenyellow">Hack the Bank team</h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <script type='text/javascript'>
+        var options = new primitives.orgdiagram.Config();
+
+        var items = [
+            new primitives.orgdiagram.ItemConfig({
+                id: 0,
+                parent: null,
+                title: "Gilad Keinan",
+                email: "gilad.keinan@sap.com",
+                description: "נגיד הבנק",
+                image: "img/I305845.jpg",
+                templateName: "contactTemplate"
+            }),
+            new primitives.orgdiagram.ItemConfig({
+                id: 1,
+                parent: 0,
+                title: "Gad Akuka",
+                email: "gad.akuka@sap.com",
+                description: "החטיבה לטכנולוגיות המידע",
+                image: "img/I306779.jpg",
+                templateName: "contactTemplate"
+            }),
+            new primitives.orgdiagram.ItemConfig({
+                id: 2,
+                parent: 0,
+                title: "Yossi Balan",
+                email: "yossi.balan@sap.com",
+                description: "חטיבת המחקר",
+                image: "img/I053322.jpg",
+                templateName: "contactTemplate"
+            }),
+            new primitives.orgdiagram.ItemConfig({
+                id: 3,
+                parent: 0,
+                title: "Mirit Mondani",
+                email: "mirit.mondani@sap.com",
+                description: "הפיקוח על הבנקים",
+                image: "img/I053570.jpg",
+                templateName: "contactTemplate"
+            }),
+            new primitives.orgdiagram.ItemConfig({
+                id: 4,
+                parent: 2,
+                title: "Sagi Lefler",
+                email: "sagi.lefler@sap.com",
+                description: "דובר הבנק",
+                image: "img/I064854.jpg",
+                templateName: "contactTemplate"
+            }),
+            new primitives.orgdiagram.ItemConfig({
+                id: 5,
+                parent: 0,
+                title: "Avishai Klaiman",
+                email: "avishai.klaiman@sap.com",
+                description: "קשרים בין לאומיים",
+                image: "img/I073060.jpg",
+                templateName: "contactTemplate"
+            }),
+            new primitives.orgdiagram.ItemConfig({
+                id: 6,
+                parent: 5,
+                title: "Anna Gurayevskaya",
+                email: "anna.gurayevskaya@sap.com",
+                description: "ביקורת פנים",
+                image: "img/I305534.jpg",
+                templateName: "contactTemplate"
+            }),
+            new primitives.orgdiagram.ItemConfig({
+                id: 7,
+                parent: 5,
+                title: "Adam Floor",
+                email: "adam.floor@sap.com",
+                description: "המחלקה המשפטית",
+                image: "img/I301983.jpg",
+                templateName: "contactTemplate"
+            })
+        ];
+
+        options.items = items;
+        options.cursorItem = 0;
+        options.hasSelectorCheckbox = primitives.common.Enabled.False;
+        options.itemSize = new primitives.common.Size(220, 220);
+        options.onItemRender = onTemplateRender;
+        options.templates = [getContactTemplate()];
+
+        function onTemplateRender(event, data) {
+            var itemConfig = data.context;
+
+            data.element.find("[name=photo]").attr({"src": itemConfig.image, "alt": itemConfig.title});
+            data.element.find("[name=titleBackground]").css({"background": itemConfig.itemTitleColor});
+
+            var fields = ["title", "description", "email"];
+            for (var index = 0; index < fields.length; index++) {
+                var field = fields[index];
+
+                var element = data.element.find("[name=" + field + "]");
+                if (element.text() != itemConfig[field]) {
+                    element.text(itemConfig[field]);
+                }
+            }
+        }
+        ;
+
+        function getContactTemplate() {
+            var result = new primitives.orgdiagram.TemplateConfig();
+            result.name = "contactTemplate";
+            result.itemSize = new primitives.common.Size(320, 220);
+            result.minimizedItemSize = new primitives.common.Size(3, 3);
+            result.highlightPadding = new primitives.common.Thickness(2, 2, 2, 2);
+
+            var itemTemplate = jQuery(
+                    '<div class="bp-item bp-corner-all bt-item-frame">'
+                    + '<div name="titleBackground" class="bp-item bp-corner-all bp-title-frame" style="top: 2px; left: 2px; width: 216px; height: 20px;">'
+                    + '<div name="title" class="bp-item bp-title" style="top: 3px; left: 6px; width: 208px; height: 18px;">'
+                    + '</div>'
+                    + '</div>'
+                    + '<div class="bp-item bp-photo-frame" style="top: 26px; left: 2px; width: 150px; height: 150px;">'
+                    + '<img name="photo" style="height:150px; width:150px;" />'
+                    + '</div>'
+                    + '<div name="email" class="bp-item" style="top: 44px; left: 156px; width: 162px; height: 18px; font-size: 16px;"></div>'
+                    + '<div name="description" class="bp-item" style="top: 62px; left: 156px; width: 162px; height: 36px; font-size: 14px;"></div>'
+                    + '</div>'
+            ).css({
+                        width: result.itemSize.width + "px",
+                        height: result.itemSize.height + "px"
+                    }).addClass("bp-item bp-corner-all bt-item-frame");
+            result.itemTemplate = itemTemplate.wrap('<div>').parent().html();
+            return result;
+        }
+        ;
+        $("#basicdiagram").orgDiagram(options);
+
+    </script>
+    <div id="basicdiagram" style="height: 1580px;"/>
+
+</div>
+
+<br/>
+<br/>
+<script>
+    ga('send', 'pageview', '/about.html');
+</script>

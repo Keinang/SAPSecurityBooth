@@ -1,72 +1,215 @@
-<!-- Timer -->
-<div class="row" xmlns="http://www.w3.org/1999/html">
-    <div class="col-sm-6 col-sm-offset-3 digits"/>
+<div class="row">
+    <div id="catchMeDiv" class="catch-me-top-div">
+        <div class="green"></div>
+        <div class="catch-me-img-div"><img src="img/catch-me.png" style="z-index: 50"></div>
+        <div class="blue"></div>
+    </div>
 </div>
+
+<!-- Timer -->
+<div class="row" style="color:white">
+    <div>
+        <div class="col-sm-6 col-sm-offset-3 digits" style="margin-top: -120px;">
+        </div>
+        <table>
+            <tr>
+                <td><img src="img/Hacking_Tools.png" style="z-index: 50; width:150px;">
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><b style="color: greenyellow">User:</b> {{$root.currentUser.firstName}}
+                                {{$root.currentUser.lastName}},
+                                ({{$root.currentUser.local.email}})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b style="color: greenyellow">Level:</b> {{user.game.level}}</td>
+                        </tr>
+                        <tr>
+                            <td><b style="color: greenyellow">Score:</b> {{user.game.score}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
 
 <br/>
 <br/>
+
+
+<!-- End game -->
+<div class="row" ng-if="user.game.level == 6">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1 style="color: greenyellow">You finished the game!!!</h1>
+        <a href="#/leaderboard2">
+            <button class="btn btn-primary">Leaderboard</button>
+        </a>
+    </div>
+</div>
+
+<img id="wrngAnswrImg" src="img/wrngAnswer.jpg" class="fading-img ng-hide" ng-show="wrongAnswer == true"/>
 
 <!-- Challenge -->
-<div class="row">
+<div class="row" ng-if="user.game.level != 6">
     <div class="col-sm-6 col-sm-offset-3 whiteBackground">
         <br/>
 
-        <div ng-hide="user.game.level !== 6">
-            <h1>You finished the game!!!</h1>
-
-            <p>Go look at the <a href="#/leaderboard">leaderboard</a></p>
-        </div>
-        <div ng-hide="user.game.level == 6">
-
+        <div>
             <h1>Level: {{user.game.level}}</h1>
-            <br/>
 
             <h2>{{user.game.question}}</h2>
-            <br/>
-            <br/>
 
-            <form ng-submit="submitAnswer()">
-                <input type="text" name="field" ng-model="answerInput"/>
-                <input type="submit" value="Submit" class="btn btn-primary"/>
-            </form>
-            <br/>
-            <button ng-click="toggleForgetPassword()" class="btn btn-default" ng-hide="user.game.level !== 2">Forgot
-                Password
-            </button>
-            <div ng-hide="user.game.level !== 2 || forgetPassword == false">
-                <h2>Forgot your password?</h2>
+            <hr>
 
-                <p>Please answer your security question</p>
+            <!-- CH 1 -->
+            <div ng-if="user.game.level == 1">
+                <br/>
+                <button ng-click="toggleRecoveryQuestion()" class="btn btn-primary"
+                        ng-hide="user.game.level !== 1">Forgot Password
+                </button>
 
-                <p>This will help us verify your identity</p>
+                <br/><br/>
 
-                <p><b>What is my favourite baseball team?</b></p>
+                <div ng-hide="!showModalCh2"><img src="img/ch1.jpg" style="z-index: 50; width:450px;"></img></div>
             </div>
-            <br/>
+
+            <!-- CH 3 -->
+            <div ng-if="user.game.level == 3">
+                <table>
+                    <tr>
+                        <th><b>Account Name</b>
+                        </td>
+                        <th style="padding: 15px;"><b>Amount</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>QWJyYWhhbQ==</td>
+                        <td style="padding: 15px;">MTAw</td>
+                    </tr>
+                    <tr>
+                        <td>RGF2aWQ=</td>
+                        <td style="padding: 15px;">MjAw</td>
+                    </tr>
+                    <tr>
+                        <td>SmFzb24=</td>
+                        <td style="padding: 15px;">MTAwMA==</td>
+                    </tr>
+                    <tr>
+                        <td>Q2FybG9zIFNsaW0=</td>
+                        <td style="padding: 15px;">MTAwMDAwMA==</td>
+                    </tr>
+                    <tr>
+                        <td>UGF1bA==</td>
+                        <td style="padding: 15px;">MjAwMA==</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- CH 4 -->
+            <div ng-if="user.game.level == 4">
+                <form ng-submit="transfer()">
+                    <table>
+                        <tr>
+                            <td><label>From account:</label></td>
+                            <td style="padding: 15px;">xjc3sr</td>
+                        </tr>
+                        <tr>
+                            <td><label>To account:</label></td>
+                            <td style="padding: 15px;" id="accountNumber">00350</td>
+                        </tr>
+                        <tr>
+                            <td><label for="amount">Amount (in USD):</label></td>
+                            <td style="padding: 15px;"><input type="text" id="amount" ng-model="amount"
+                                                              placeholder="Enter amount to transfer..." width="200px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit" class="btn btn-primary">Transfer money</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <br/>
+            </div>
+
+            <!-- Submitting answer area -->
+            <form ng-submit="submitAnswer()">
+                <p ng-if="user.game.level == 4">Enter the confirmation key here:</p>
+                <input type="text" name="field" id="answerInput" ng-hide="user.game.level === 5"/>
+                <input type="submit" value="Submit" class="btn btn-primary" ng-hide="user.game.level === 5"
+                       style="margin-left: 15px;"/>
+                <input type="submit" value="Delete Log" class="btn btn-primary" ng-if="user.game.level == 5"/>
+            </form>
+
+            <!-- Hints section -->
+            <hr>
+
+            <form ng-submit="getHint()">
+                <div>
+                    <h3>Hints</h3>
+                    <ol id="hintList">
+                        <li ng-repeat="hint in user.game.hints">{{hint}}</li>
+                    </ol>
+                    <input type="submit" id="hintButton" value="Give me a Hint" class="btn btn-primary hint-button"
+                           title="Get Hint (this will reduce your score a bit)"
+                           ng-disabled="isHintDisabled" ng-hide="isHintDisabled"/>
+                </div>
+            </form>
             <br/>
         </div>
     </div>
 </div>
-<br/>
-<br/>
-<!-- --------------------------------------------------------------------- -->
-<!-- Bank door code is: 271083, shhh tell no one!                       -->
-<!-- --------------------------------------------------------------------- -->
-<br/>
-<br/>
-<!-- For Debug -->
-<div class="row" ng-hide="isDebug == false">
-    <div class="col-sm-6 col-sm-offset-3 whiteBackground">
-        <br/>
-
-        <h1>Debugging Info</h1>
-        <br>Name: {{user.firstName}} {{user.lastName}}</br>
-        <br>Email: {{user.local.email}}</br>
-        <br>Score: {{user.game.score}}</br>
-        <br>Level: {{user.game.level}}</br>
-        <br>Timer: {{user.game.timeEnd}}</br>
-        <br>Question: {{user.game.question}}</br>
-        <br>Hints: {{user.game.hints}}</br>
-        <br/>
-    </div>
+<div class="row" ng-if="user.game.level === 2">
+    <table align="center" cellpadding="10">
+        <tr bgcolor="transparent">
+            <td>
+                <pre style="background-color: transparent; border:none; color: transparent">
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdmmmmmmmmmmmmmmmmmmmmmmdddmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdo/:::/+osyhddmmmmmddhyo+:-...-odmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmh/:::::--------------.......`````:hmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmd/::::::----------------.....``````-hmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmd+/::::::-------..............```````-dmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmms//::::::-------..............````````/mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmh///::::::-------..............`````````smmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmo///::::::-------..............`````````.hmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmh////::::::-------..............``````````/mmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmo////::::::-------..............``````````.ymmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmd+////::::::-------..............```````````/mmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmy/////::::::-------..............```````````.hmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmms++///::::::-------..............``````````..ommmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmddhhhhooo++//:::::-------..............```````.....:yyhhhddmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmddhyso+///::ooo++++///:::------...............................---:+osyhdmmmmmmmmmmmm
+    mmmmmmmmmmmmddhso++////:::::++o++++/////:::::-------......................```````````.-:/sydmmmmmmmm
+    mmmmmmmmmdhyso+++//////:::::::://++/////::::::-----------...............``````````````````.-/shdmmmm
+    mmmmmmmhsso++++++//////:::::::---:::::::::::::-----------............````````````````````.-:/oydmmmm
+    mmmmmmmddhhyso+++//////:::::::-----------------------............````````````````````.-/syddmmmmmmmm
+    mmmmmmmmmmmmmmdhhyo++//:::::::----------.......................``````````````````.-+shdmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmdhys+/:::::----------.......................``````````````.-/shdmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmdhs+//:---------.......................``````````.-/sydmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmdhyo+::-----.......................`````..-+shdmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmhhmmdhys+:---..................``..-:/oyhmmdymmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmdy+mmmmmmmmdhyso+/::---------:/+osyhdmmmmmmmyshmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmdsdhddddddmmmmmmmmmmmmdddddddmmmmmmmmmmddddddhhydmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmms+ssssyysssssyhhddmmmmmmmmmmmmmdddhyssssooo++++//mmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmy/++++++++++++////+shhyyyyyyhhoo+++oo++///:::---/mmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmm-`.---::::::::::::.oyhddddhy-+///:::----....```hmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmy-```````.........`smmmmmmmm.--......````````.ommmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmhs+:.``````````` smmmmmmmm````````````.-/oydmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdhso+/::--:/dmmmmmmmmo:--::/+osydmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm   The door lock code is 271083  mmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+</pre>
+            </td>
+        </tr>
+    </table>
 </div>

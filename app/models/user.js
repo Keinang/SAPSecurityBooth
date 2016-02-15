@@ -13,9 +13,12 @@ var userSchema = mongoose.Schema({
     game: {
         level: {type: Number, default: 1},
         score: {type: Number, default: 0},
-        timeEnd: {type: Date}
+        hints: [String],
+        hasMoreHints: Boolean,
+        timeStart: {type: Date},
+        timeEnd: {type: Date},
+        timeUserFinished: {type: Date}
     }
-
 });
 
 // generating a hash

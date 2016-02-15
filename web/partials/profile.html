@@ -1,28 +1,31 @@
 <br/>
 <br/>
 
-<!-- User Info -->
 <div class="row">
-    <div class="col-sm-6 col-sm-offset-3 whiteBackground">
-        <br/>
-        <!-- Info -->
-        <h1>Profile</h1>
-        <br>Name: {{user.firstName}} {{user.lastName}}
-        <br>Email: {{user.local.email}}
-        <br>Level: {{user.game.level}}
-        <br>Score: {{user.game.score}}
-        <br>Timer: {{user.game.timeEnd}}
-        <br>
+    <div id="catchMeDiv" class="catch-me-top-div">
+        <div class="green"></div>
+        <div class="catch-me-img-div"><img src="img/catch-me.png" style="z-index: 50"></div>
+        <div class="blue"></div>
     </div>
 </div>
-
 <br/>
 <br/>
-
 <!-- Start to begin -->
-<div class="row ">
-    <a class="button-start col-sm-6 col-sm-offset-3" href="#/game">START</a>
+<div class="row col-sm-6 col-sm-offset-3">
+    <h1 style="color:white">You are a white hat hacker that wants to be rich.</br>
+        Your target is to hack the bank and transfer 1 million dollars to your bank account in 15 minutes!<br/>
+        In any time you can read the <a href="#/help" style="color:greenyellow">Help</a> guide which is also available
+        at the top right screen.
+    </h1>
+
+    <div class="row text-center">
+        <div class="col-sm-12">
+            <a class="button-start" href="#/game">Start the Game</a>
+        </div>
+    </div>
+    <br/>
 </div>
+<img src="img/Hacking_Tools.png" style="z-index: 50; width:150px;">
 <script>
     ga('send', 'pageview', '/profile.html');
 </script>

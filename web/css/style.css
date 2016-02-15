@@ -10,8 +10,29 @@ body {
     overflow-x: hidden;
 }
 
+
+.fading-img{
+	position: absolute;
+	z-index: 51;
+	margin: auto;
+  	top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.fading-img.ng-show-remove{
+	opacity: 0 !important;
+    transition: all linear 1s;
+	-webkit-transition:all linear 1s;
+  	-moz-transition:all linear 1s;
+  	-o-transition:all linear 1s;
+  	/*display: block !important;*/
+}
+
 .whiteBackground {
     background-color: white;
+}
+
+.navbar-header {
+    width: 200px;
 }
 
 .appname-standard-border {
@@ -155,4 +176,37 @@ body {
 }
 
 .leaderboard {
+}
+
+.catch-me-img-div {
+    position: absolute;
+    width: 100%;
+}
+
+.catch-me-img-div img {
+    display: inline-block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.catch-me-top-div {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.green {
+    background-image: url('../img/green.png');
+    background-repeat: repeat-x;
+    float: left;
+    width: 50%;
+    height: 294px;
+}
+
+.blue {
+    background-image: url('../img/blue.png');
+    background-repeat: repeat-x;
+    float: right;
+    width: 50%;
+    height: 294px;
 }

@@ -1,16 +1,49 @@
 <br/>
 <br/>
+
+<div class="row">
+    <div id="catchMeDiv" class="catch-me-top-div">
+        <div class="green"></div>
+        <div class="catch-me-img-div"><img src="img/catch-me.png" style="z-index: 50"></div>
+        <div class="blue"></div>
+    </div>
+</div>
+
 <div class="row ">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="row text-center">
+            <h1 style="color:greenyellow">Leaderboard</h1>
+        </div>
+    </div>
+
     <div class="col-sm-6 col-sm-offset-3 whiteBackground">
-        <br/>
+        <div id="cloud">
+            <canvas id="myCanvas" style="width: 100%">
+                <ul class="weighted" id="weightTags">
 
-        <h1>Leaderboard</h1>
-        <br/>
-
-        <div class="leaderboard">{{users}}</div>
-        <br/>
+                </ul>
+            </canvas>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 ">
+        <table class="leaderboardAsTable whiteBackground">
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+            <tr ng-repeat="user in users | orderBy:'-game.score'">
+                <td>{{user.firstName}} {{user.lastName}}</td>
+                <td>{{user.game.score}}</td>
+            </tr>
+        </table>
     </div>
 </div>
 <script>
     ga('send', 'pageview', '/leaderboard.html');
 </script>
+<br/>
+<br/>
+<br/>
