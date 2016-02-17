@@ -43,49 +43,52 @@ angular.module('appname.controllers', ['ngAnimate'])
     .controller('leaderboardCtrl', ['$scope', 'leaderboardService', 'toastr', '$rootScope', function ($scope, leaderboardService, toastr, $rootScope) {
         $scope.getAllUserList = function () {
             leaderboardService.getAllUserList().then(function (result) {
-                $scope.users = result.users;
+				$scope.users = result.users;
+				var canvas = document.getElementById("myCanvas");
+				// Make it visually fill the positioned parent
+				canvas.style.width ='100%';
+				canvas.style.height='100%';
+				// ...then set the internal size to match
+				canvas.width  = canvas.offsetWidth;
+				canvas.height = canvas.offsetHeight;
 
-                $('#myCanvas ul').empty();
-                for (var i = 0; i < $scope.users.length; i++) {
-                    // Score:
-                    var score = $scope.users[i]["game"]["score"];
-                    if (score === 0) { // bug with tagcloud
-                        score = 1;
-                    }
 
-                    var item = '<a href="#/leaderboard" data-weight="' + score + '">' + $scope.users[i]["firstName"] + ' ' + $scope.users[i]["lastName"] + '(' + score + ')' + "</a>";
-                    $('#myCanvas ul').append(item);
-                }
+				$('#userList ul').empty();
+				$('#userList').css("background-color", "rgba(0, 0, 0, 0)");
+				for (var i = 0; i < $scope.users.length; i++) {
+					// Score:
+					var score = $scope.users[i]["game"]["score"];
+					if (score === 0) { // bug with tagcloud
+						score = 1;
+					}
 
-                var gradient = {
-                    17: '#f00', // red
-                    0.33: '#ff0', // yellow
-                    0.5: 'orange', // orange
-                    0.66: '#0f0', // green
-                    1: '#00f' // blue
-                };
-                $('#myCanvas').tagcanvas({
-                    weightGradient: gradient,
-                    weight: true,
-                    weightFrom: 'data-weight',
-                    shadow: '#ccf',
-                    shadowBlur: 3,
-                    interval: 20,
-                    textFont: 'Impact,Arial Black,sans-serif',
-                    textColour: '#82797B',
-                    textHeight: 14,
-                    outlineColour: '#F2F0F0',
-                    outlineThickness: 5,
-                    maxSpeed: 0.1,
-                    minBrightness: 0.1,
-                    depth: 0.92,
-                    pulsateTo: 0.2,
-                    pulsateTime: 0.75,
-                    initial: [0.1, -0.1],
-                    decel: 0.98,
-                    reverse: true,
-                    hideTags: false
-                }, 'weightTags');
+					var item = '<a href="#/leaderboard" data-weight="' + (score / 10 + 20) + '">' + (i+1) + '. ' + $scope.users[i]["firstName"] + ' ' + $scope.users[i]["lastName"] + ' : ' + score + "</a>";
+					$('#userList ul').append(item);
+				}
+
+				//window.onload = function() {
+					try {
+						TagCanvas.Start('myCanvas','userList',{
+							reverse: true,
+							depth: 0.8,
+							maxSpeed: 0.01,
+							noMouse: true,
+							initial: [0.2,0.2],
+							weight: true,
+							weightFrom:  "data-weight",
+							textFont: 'Impact,Arial Black,sans-serif;',
+							textHeight: 25,
+							weightMode: "both",
+							weightGradient: {0:'red', 0.33:'#C13B00', 0.66:'#FF6600', 1:'#ffc'},
+							zoom: 2
+						});
+					} catch(e) {
+						// something went wrong, hide the canvas container
+						console.log(e.message);
+						document.getElementById('myCanvas').style.display = 'none';
+					}
+				//};
+
             });
         };
 
@@ -565,6 +568,12 @@ angular.module('appname.controllers', ['ngAnimate'])
             $scope.showModalCh2 = !$scope.showModalCh2;
         };
 
+        $scope.showPicture = function () {
+            $scope.ShowPic = true;
+            $timeout(function () {
+                $scope.ShowPic = false;
+            }, 2000);
+        };
         // logout when time is up
         $scope.checkUserTime = function () {
             if ($scope.user.game.timeEnd !== undefined && new Date($scope.user.game.timeEnd) - new Date() < 0) {

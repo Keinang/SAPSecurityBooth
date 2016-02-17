@@ -54,6 +54,7 @@
 
 <img id="wrngAnswrImg" src="img/wrngAnswer.jpg" class="fading-img ng-hide" ng-show="wrongAnswer == true"/>
 
+<img id="wrngAnswrImg" src="img/worngAns.jpg" class="fading-img ng-hide" ng-show="ShowPic == true"/>
 <!-- Challenge -->
 <div class="row" ng-if="user.game.level != 6">
     <div class="col-sm-6 col-sm-offset-3 whiteBackground">
@@ -61,7 +62,10 @@
 
         <div>
             <h1>Level: {{user.game.level}}</h1>
-
+            <div ng-hide="!showModalCh2">
+            <div class="mouse-invisible"  ng-style="{ 'height' : '30px' ,'width' : '9px', 'background' : 'white' }" ng-click="showPicture()">
+            </div>
+            </div>
             <h2>{{user.game.question}}</h2>
 
             <hr>
@@ -72,10 +76,10 @@
                 <button ng-click="toggleRecoveryQuestion()" class="btn btn-primary"
                         ng-hide="user.game.level !== 1">Forgot Password
                 </button>
-
                 <br/><br/>
 
                 <div ng-hide="!showModalCh2"><img src="img/ch1.jpg" style="z-index: 50; width:450px;"></img></div>
+                <p ng-hide="!showModalCh2">Use QR reader application or use <a href="https://webqr.com/">this site</a> to read it.</p>
             </div>
 
             <!-- CH 3 -->

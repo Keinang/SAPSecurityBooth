@@ -210,3 +210,7 @@ body {
     width: 50%;
     height: 294px;
 }
+
+.mouse-invisible{
+    cursor:crosshair;
+}

@@ -5,7 +5,7 @@ module.exports = function (app, passport) {
     var ch4ExpectedMoney = 1000000;
     var ch4ExpectedAccount = 424242;
     var Answers = {
-        '1': 'San Jose Sharks',
+        '1': 'sharks',
         '2': '271083',
         '3': 'Carlos Slim', // https://www.base64encode.org/
         '4': 'n00b',
@@ -14,16 +14,16 @@ module.exports = function (app, passport) {
 
     var Questions = {
         '1': "You entered the bank. Log in as Hasso Plattner.",
-        '2': "Inside the bank there is an internal computer to transfer funds inside a locked room. Your mission is to find the door lock code hidden somewhere.",
-        '3': "You found the bank account information file, but unfortunately it is not readable. You need to find the richest account name.",
+        '2': "Inside the bank there is an internal computer to transfer funds inside a locked room. Your mission is to find the door lock code hidden somewhere in front of the page.",
+        '3': "You found the bank account information file, but unfortunately it is not readable. You need to find the account name with the most amount.",
         '4': 'Transfer 1 Million dollars to your account number: 424242',
-        '5': 'Remove the transfers log from the server.'
+        '5': 'Remove the log from the server.'
     };
 
     var Hints = {
         '1': ['Did you check to whom the forgotten password question was sent?', 'Use social engineering knowledge to discover the password.', 'Did you read Hasso\'s wikipedia page?'],
-        '2': ['Did you try to hover all content in the page?'],
-        '3': ['Can you understand the encryption method?', 'Try to decode it and find the biggest value.', 'base64 would be useful here.'],
+        '2': ['Did you try to select all content in the page?'],
+        '3': ['https://www.base64decode.org/','Can you understand the encryption method?', 'Try to decode it and find the biggest value.', 'base64 would be useful here.'],
         '4': ['If you post it...It will come....', 'Try to tamper with the data as needed.'],
         '5': ['What is common to Oreo, chocolate chips and what grandmothers give to their grandsons?', 'Can you change the value of the cookie?', 'The cookie key is isAdmin']
     };
@@ -31,9 +31,9 @@ module.exports = function (app, passport) {
     var LevelScore = {
         1: 1,
         2: 2,
-        3: 3,
-        4: 4,
-        5: 5
+        3: 4,
+        4: 8,
+        5: 16
     };
 
 // LOGOUT ==============================
@@ -303,7 +303,7 @@ module.exports = function (app, passport) {
         if (user.game.level == 5) {
             isCorrect = (cookies.isAdmin === 'true');
         } else {
-            isCorrect = (Answers[level].toLowerCase() == answer.toLowerCase());
+            isCorrect = (Answers[level].toLowerCase().trim() == answer.toLowerCase().trim());
         }
         if (isCorrect) {
             // set level:

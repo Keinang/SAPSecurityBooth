@@ -9,38 +9,15 @@
     </div>
 </div>
 
-<div class="row ">
-    <div class="col-sm-6 col-sm-offset-3">
-        <div class="row text-center">
-            <h1 style="color:greenyellow">Leaderboard</h1>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-sm-offset-3 whiteBackground">
-        <div id="cloud">
-            <canvas id="myCanvas" style="width: 100%">
-                <ul class="weighted" id="weightTags">
-
-                </ul>
-            </canvas>
-        </div>
-    </div>
+ <div id="cloud" style="width:100%;height:450px">
+	<canvas id="myCanvas" style="font-size: 50%;width:100%;height:100%" >
+		<p>Leaderboard</p>
+	</canvas>
 </div>
-<br/>
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3 ">
-        <table class="leaderboardAsTable whiteBackground">
-            <tr>
-                <th>Name</th>
-                <th>Score</th>
-            </tr>
-            <tr ng-repeat="user in users | orderBy:'-game.score'">
-                <td>{{user.firstName}} {{user.lastName}}</td>
-                <td>{{user.game.score}}</td>
-            </tr>
-        </table>
-    </div>
-</div>
+
+
+<div id="userList"><ul></ul></div>
+	
 <script>
     ga('send', 'pageview', '/leaderboard.html');
 </script>
