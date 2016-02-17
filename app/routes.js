@@ -327,6 +327,7 @@ module.exports = function (app, passport) {
             hintFactor = 1 - ((user.game.hints.length + 1) * 0.1);
         }
         user.game.score += diffMins * scoreFactor * hintFactor;
+        user.game.score = Math.round(user.game.score);
 
         // Clear hints for next level
         user.game.hints = [];
