@@ -238,8 +238,10 @@ module.exports = function (app, passport) {
             if (req.body.amount == ch4ExpectedMoney) {
                 //setUserScoreAndLevel(user);
                 response.status = 'OK';
-                response.message = 'You transferred 1M$! add the confirmation key to proceed to level 5... ';
-                response.confirmationKey = Answers['4'];
+                response.message = 'You transferred 1M$! Enter the confirmation key to proceed to level 5...';
+                //response.confirmationKey = Answers['4'];
+				response.confirmationToken = true;
+				response.confKey = 'Your confirmation key is:' + Answers['4'];
                 return res.json(200, response);
             } else {
                 // wrong money
@@ -255,7 +257,7 @@ module.exports = function (app, passport) {
         } else {
             // the user didn't change anything...
             response.status = 'ERROR';
-            response.message = 'Successfully transfer money to ' + req.body.accountNumber + ' account...';
+            response.message = 'You need to transfer the money to your account: 424242....';
             return res.json(200, response);
         }
 

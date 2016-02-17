@@ -552,7 +552,9 @@ angular.module('appname.controllers', ['ngAnimate'])
                 gameService.transfer(data).then(function (result) {
                     if (result.status === 'OK') {
 
-                        toastr.success('Great Success! Check response for confirmation key to proceed');
+                        //toastr.success('Great Success! Check response for confirmation key to proceed');
+						toastr.success(result.message);             
+						setConfirmationToken($scope,true,result.confKey);
                     }
                     else if (result.status === 'idle') {
                         toastr.success('Money successfully transferred!');
@@ -616,3 +618,7 @@ function setUiHints(scope) {
     scope.isHintDisabled = !scope.user.game.hasMoreHints;
 }
 
+function setConfirmationToken(scope, confirmation, confK) {
+    scope.confirmationToken = true;
+	scope.confKey = confK;
+}

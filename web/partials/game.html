@@ -96,19 +96,19 @@
                         <td style="padding: 15px;">MTAw</td>
                     </tr>
                     <tr>
-                        <td>RGF2aWQ=</td>
+                        <td>S2V5c2VyIFPDtnpl</td>
                         <td style="padding: 15px;">MjAw</td>
                     </tr>
                     <tr>
                         <td>VHlsZXIgRHVyZGVu</td>
-                        <td style="padding: 15px;">SSBkb24ndCBleGlzdA==</td>
+                        <td style="padding: 15px;">MzAwMA==</td>
                     </tr>
                     <tr>
                         <td>Q2FybG9zIFNsaW0=</td>
                         <td style="padding: 15px;">MTAwMDAwMA==</td>
                     </tr>
                     <tr>
-                        <td>UGF1bA==</td>
+                        <td>RHIuIE1hbGNvbG0gQ3Jvd2U=</td>
                         <td style="padding: 15px;">MjAwMA==</td>
                     </tr>
                 </table>
@@ -144,9 +144,9 @@
 
             <!-- Submitting answer area -->
             <form ng-submit="submitAnswer()">
-                <p ng-if="user.game.level == 4">Enter the confirmation key here:</p>
-                <input type="text" name="field" id="answerInput" ng-hide="user.game.level === 5"/>
-                <input type="submit" value="Submit" class="btn btn-primary" ng-hide="user.game.level === 5"
+                <p ng-if="user.game.level == 4 && confirmationToken == true">{{confKey}}</p>
+                <input type="text" name="field" id="answerInput" ng-hide="user.game.level === 5 || (user.game.level == 4 && confirmationToken != true) "/>
+                <input type="submit" value="Submit" class="btn btn-primary" ng-hide="user.game.level === 5  || (user.game.level == 4 && confirmationToken != true)"
                        style="margin-left: 15px;"/>
                 <input type="submit" value="Delete Log" class="btn btn-primary" ng-if="user.game.level == 5"/>
             </form>
