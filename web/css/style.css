@@ -214,3 +214,10 @@ body {
 .mouse-invisible{
     cursor:crosshair;
 }
+
+.header_bankhack h1 {
+    font-family: inherit;
+    color: white;
+    text-align: center;
+    font-size: 115px;
+}

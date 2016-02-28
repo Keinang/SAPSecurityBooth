@@ -43,51 +43,56 @@ angular.module('appname.controllers', ['ngAnimate'])
     .controller('leaderboardCtrl', ['$scope', 'leaderboardService', 'toastr', '$rootScope', function ($scope, leaderboardService, toastr, $rootScope) {
         $scope.getAllUserList = function () {
             leaderboardService.getAllUserList().then(function (result) {
-				$scope.users = result.users;
-				var canvas = document.getElementById("myCanvas");
-				// Make it visually fill the positioned parent
-				canvas.style.width ='100%';
-				canvas.style.height='100%';
-				// ...then set the internal size to match
-				canvas.width  = canvas.offsetWidth;
-				canvas.height = canvas.offsetHeight;
+                $scope.users = result.users;
+                var canvas = document.getElementById("myCanvas");
+                // Make it visually fill the positioned parent
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+                // ...then set the internal size to match
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
 
+                $('#catchMeDiv').hide();
+                $('.navbar').hide();
+                $('#userList ul').empty();
+                $('#userList').css("background-color", "rgba(0, 0, 0, 0)");
+                $('#myCanvas').css("background-image", "url('img/anonymous.jpg')");
+                $('#myCanvas').css("opacity", "0.6");
 
-				$('#userList ul').empty();
-				$('#userList').css("background-color", "rgba(0, 0, 0, 0)");
-				for (var i = 0; i < $scope.users.length; i++) {
-					// Score:
-					var score = $scope.users[i]["game"]["score"];
-					if (score === 0) { // bug with tagcloud
-						score = 1;
-					}
+                for (var i = 0; i < $scope.users.length; i++) {
+                    // Score:
+                    var score = $scope.users[i]["game"]["score"];
+                    if (score === 0) { // bug with tagcloud
+                        score = 1;
+                    }
 
-					var item = '<a href="#/leaderboard" data-weight="' + (score / 10 + 20) + '">' + (i+1) + '. ' + $scope.users[i]["firstName"] + ' ' + $scope.users[i]["lastName"] + ' : ' + score + "</a>";
-					$('#userList ul').append(item);
-				}
+                    var item = '<a href="#/leaderboard" data-weight="' + (score + 15) + '">' + (i + 1) + '. ' + $scope.users[i]["firstName"] + ' ' + $scope.users[i]["lastName"] + ' : ' + score + "</a>";
+                    $('#userList ul').append(item);
+                }
 
-				//window.onload = function() {
-					try {
-						TagCanvas.Start('myCanvas','userList',{
-							reverse: true,
-							depth: 0.8,
-							maxSpeed: 0.01,
-							noMouse: true,
-							initial: [0.2,0.2],
-							weight: true,
-							weightFrom:  "data-weight",
-							textFont: 'Impact,Arial Black,sans-serif;',
-							textHeight: 25,
-							weightMode: "both",
-							weightGradient: {0:'red', 0.33:'#C13B00', 0.66:'#FF6600', 1:'#ffc'},
-							zoom: 2
-						});
-					} catch(e) {
-						// something went wrong, hide the canvas container
-						console.log(e.message);
-						document.getElementById('myCanvas').style.display = 'none';
-					}
-				//};
+                //window.onload = function() {
+                try {
+                    TagCanvas.Start('myCanvas', 'userList', {
+                        reverse: true,
+                        depth: 0.8,
+                        maxSpeed: 0.01,
+                        noMouse: true,
+                        initial: [0.2, 0.2],
+                        weight: true,
+                        weightFrom: "data-weight",
+                        textFont: 'Impact,Arial Black,sans-serif;',
+                        textHeight: 25,
+                        weightMode: "both",
+                        textColour: "white",
+                        weightGradient: {0: '#C58C33', 0.66: '#fff', 1: '#fff'},
+                        zoom: 1
+                    });
+                } catch (e) {
+                    // something went wrong, hide the canvas container
+                    console.log(e.message);
+                    document.getElementById('myCanvas').style.display = 'none';
+                }
+                //};
 
             });
         };
@@ -553,8 +558,8 @@ angular.module('appname.controllers', ['ngAnimate'])
                     if (result.status === 'OK') {
 
                         //toastr.success('Great Success! Check response for confirmation key to proceed');
-						toastr.success(result.message);             
-						setConfirmationToken($scope,true,result.confKey);
+                        toastr.success(result.message);
+                        setConfirmationToken($scope, true, result.confKey);
                     }
                     else if (result.status === 'idle') {
                         toastr.success('Money successfully transferred!');
@@ -586,9 +591,9 @@ angular.module('appname.controllers', ['ngAnimate'])
             return true;
         };
 
-        $scope.startCheckTime = function(){
+        $scope.startCheckTime = function () {
             setTimeout(function () {
-                if ($scope.checkUserTime()){
+                if ($scope.checkUserTime()) {
                     $scope.startCheckTime();
                 }
 
@@ -598,6 +603,13 @@ angular.module('appname.controllers', ['ngAnimate'])
         $scope.startCheckTime();
         document.location.href = "#"; // scroll up
         $scope.getUserInfo(true);
+
+        $scope.onToggleButtonCH1 = function () {
+            $("#toggleButtonCH1").css({
+                left: (Math.random() * 400) + "px",
+                top: (Math.random() * 400) + "px"
+            });
+        }
     }]);
 
 function showDigits(userTimeEnd, toastr) {
@@ -620,5 +632,5 @@ function setUiHints(scope) {
 
 function setConfirmationToken(scope, confirmation, confK) {
     scope.confirmationToken = true;
-	scope.confKey = confK;
+    scope.confKey = confK;
 }

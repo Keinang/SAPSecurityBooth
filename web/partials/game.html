@@ -1,5 +1,17 @@
+<br/>
+<br/>
+<br/>
 <div class="row">
     <div id="catchMeDiv" class="catch-me-top-div">
+        <div style="color: white; padding-left:25px; padding-top: 10px; text-align: -webkit-auto;">
+
+            <div><b style="color: greenyellow">User:</b> {{$root.currentUser.firstName}} {{$root.currentUser.lastName}},
+                ({{$root.currentUser.local.email}})
+            </div>
+            <div><b style="color: greenyellow">Level:</b> {{user.game.level}}</div>
+            <div><b style="color: greenyellow">Score:</b> {{user.game.score}}</div>
+        </div>
+
         <div class="green"></div>
         <div class="catch-me-img-div"><img src="img/catch-me.png" style="z-index: 50"></div>
         <div class="blue"></div>
@@ -7,44 +19,16 @@
 </div>
 
 <!-- Timer -->
-<div class="row" style="color:white">
+<div style="color:white">
     <div>
-        <div class="col-sm-6 col-sm-offset-3 digits" style="margin-top: -120px;">
+        <div class="col-sm-5 col-sm-offset-3 digits" style="margin-top: -120px;">
         </div>
-        <table>
-            <tr>
-                <td><img src="img/Hacking_Tools.png" style="z-index: 50; width:150px;">
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td><b style="color: greenyellow">User:</b> {{$root.currentUser.firstName}}
-                                {{$root.currentUser.lastName}},
-                                ({{$root.currentUser.local.email}})
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b style="color: greenyellow">Level:</b> {{user.game.level}}</td>
-                        </tr>
-                        <tr>
-                            <td><b style="color: greenyellow">Score:</b> {{user.game.score}}</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-
     </div>
 </div>
 
-
-<br/>
-<br/>
-
-
 <!-- End game -->
 <div class="row" ng-if="user.game.level == 6">
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-sm-5 col-sm-offset-3">
         <h1 style="color: greenyellow">You finished the game!!!</h1>
         <a href="#/leaderboard2">
             <button class="btn btn-primary">Leaderboard</button>
@@ -57,34 +41,40 @@
 <img id="wrngAnswrImg" src="img/worngAns.jpg" class="fading-img ng-hide" ng-show="ShowPic == true"/>
 <!-- Challenge -->
 <div class="row" ng-if="user.game.level != 6">
-    <div class="col-sm-6 col-sm-offset-3 whiteBackground">
+    <div class="col-sm-5 col-sm-offset-3 whiteBackground text-center" style="border-radius: 25px;">
         <br/>
 
         <div>
             <h1>Level: {{user.game.level}}</h1>
+
             <div ng-hide="!showModalCh2">
-            <div class="mouse-invisible"  ng-style="{ 'height' : '30px' ,'width' : '9px', 'background' : 'white' }" ng-click="showPicture()">
+                <div class="mouse-invisible" ng-style="{ 'height' : '30px' ,'width' : '9px', 'background' : 'white' }"
+                     ng-click="showPicture()">
+                </div>
             </div>
-            </div>
-            <h2>{{user.game.question}}</h2>
+            <h2 style="text-align: left">{{user.game.question}}</h2>
 
             <hr>
 
             <!-- CH 1 -->
             <div ng-if="user.game.level == 1">
                 <br/>
-                <button ng-click="toggleRecoveryQuestion()" class="btn btn-primary"
+
+                <button ng-click="toggleRecoveryQuestion()" class="btn btn-primary" id="toggleButtonCH1"
+                        style="position:absolute; top:10px; left:10px;" ng-mouseover="onToggleButtonCH1()"
                         ng-hide="user.game.level !== 1">Forgot Password
+
                 </button>
                 <br/><br/>
-
+                <p>Click on forgot password button to recover your password</p>
                 <div ng-hide="!showModalCh2"><img src="img/ch1.jpg" style="z-index: 50; width:450px;"></img></div>
-                <p ng-hide="!showModalCh2">Use QR reader application or use <a href="https://webqr.com/">this site</a> to read it.</p>
+                <p ng-hide="!showModalCh2">Use QR reader application or use <a href="https://webqr.com/">this site</a>
+                    to read it.</p>
             </div>
 
             <!-- CH 3 -->
             <div ng-if="user.game.level == 3">
-                <table>
+                <table style="text-align: left">
                     <tr>
                         <th><b>Account Name</b>
                         </td>
@@ -117,7 +107,7 @@
             <!-- CH 4 -->
             <div ng-if="user.game.level == 4">
                 <form ng-submit="transfer()">
-                    <table>
+                    <table style="text-align: center">
                         <tr>
                             <td><label>From account:</label></td>
                             <td style="padding: 15px;">xjc3sr</td>
@@ -145,8 +135,10 @@
             <!-- Submitting answer area -->
             <form ng-submit="submitAnswer()">
                 <p ng-if="user.game.level == 4 && confirmationToken == true">{{confKey}}</p>
-                <input type="text" name="field" id="answerInput" ng-hide="user.game.level === 5 || (user.game.level == 4 && confirmationToken != true) "/>
-                <input type="submit" value="Submit" class="btn btn-primary" ng-hide="user.game.level === 5  || (user.game.level == 4 && confirmationToken != true)"
+                <input type="text" name="field" id="answerInput"
+                       ng-hide="user.game.level === 5 || (user.game.level == 4 && confirmationToken != true) "/>
+                <input type="submit" value="Submit" class="btn btn-primary"
+                       ng-hide="user.game.level === 5  || (user.game.level == 4 && confirmationToken != true)"
                        style="margin-left: 15px;"/>
                 <input type="submit" value="Delete Log" class="btn btn-primary" ng-if="user.game.level == 5"/>
             </form>
@@ -157,9 +149,12 @@
             <form ng-submit="getHint()">
                 <div>
                     <h3>Hints</h3>
-                    <ol id="hintList">
-                        <li ng-repeat="hint in user.game.hints">{{hint}}</li>
-                    </ol>
+
+                    <div style="text-align: left">
+                        <ol id="hintList">
+                            <li ng-repeat="hint in user.game.hints">{{hint}}</li>
+                        </ol>
+                    </div>
                     <input type="submit" id="hintButton" value="Give me a Hint" class="btn btn-primary hint-button"
                            title="Get Hint (this will reduce your score a bit)"
                            ng-disabled="isHintDisabled" ng-hide="isHintDisabled"/>
@@ -168,6 +163,8 @@
             <br/>
         </div>
     </div>
+    <br/>
+    <br/>
 </div>
 <div class="row" ng-if="user.game.level === 2">
     <table align="center" cellpadding="10">
