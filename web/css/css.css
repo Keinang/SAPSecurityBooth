@@ -68,11 +68,14 @@ body{
 }
 
 .content {
-    position:relative;
-    width:70%;
-    margin:3px auto 0 auto;
+    position: absolute;
+    width: 70%;
+    margin: 3px auto 0 auto;
+    min-width: 300px;
+    top: 110px;
+    left: 50px;
+    z-index: 9999;
     min-width:300px;
-
 }
 
 .content ul{
@@ -80,7 +83,7 @@ body{
     padding:0;
     list-style: none;
     border:5px solid #CCC;
-    background: rgba(40,40,40,0.75);
+    background: rgba(40,40,40,0.35);
 }
 .content ul li{
     position: relative;
@@ -196,21 +199,7 @@ body{
     color: #cc7713;
 }
 
-.content {
-    position:relative;
-    width:70%;
-    margin:3px auto 0 auto;
-    min-width:300px;
 
-}
-
-.content ul{
-    margin:0;
-    padding:0;
-    list-style: none;
-    border:5px solid #CCC;
-    background: rgba(40,40,40,0.75);
-}
 .content ul li{
     position: relative;
     color:#FFF;
@@ -287,3 +276,9 @@ body{
     80% {transform: rotate(10deg)}
     100% {transform: rotate(-10deg)}
 }
+
+/*basic reset*/
+* {margin: 0; padding: 0;}
+/*adding a black bg to the body to make things clearer*/
+body {background: black;}
+canvas {display: block;}
