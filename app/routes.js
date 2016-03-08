@@ -1,5 +1,6 @@
 module.exports = function (app, passport) {
     var user = require('../app/models/user');
+    var http = require('http');
 
     var TIME_PLAY_IN_MINUTES = 15;
     var ch4ExpectedMoney = 1000000;
@@ -100,10 +101,14 @@ module.exports = function (app, passport) {
             // Manually establish the session...
             req.login(user, function (err) {
                 if (err) {
-                    return next(error);
+                    return next(err);
                 }
                 response.status = 'OK';
                 response.user = user;
+
+                // send counter plus one
+                plusOne(user);
+
                 return res.json(200, response);
             });
         })(req, res, next);
@@ -370,8 +375,9 @@ function responseWrapper(response, res, status, message, user) {
 }
 
 function plusOne(){
+    var http = require('http');
     var options = {
-        host: 'http://dkom16boothcount.meteorapp.com',
+        host: 'dkom16boothcount.meteorapp.com',
         port: 8080,
         path: '/plusone?name=Hackmeifyoucan2',
         method: 'POST',
@@ -387,6 +393,5 @@ function plusOne(){
             console.log("body: " + chunk);
         });
     });
-    httpreq.write(data);
     httpreq.end();
 }
