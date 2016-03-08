@@ -378,7 +378,7 @@ function plusOne(){
     var http = require('http');
     var options = {
         host: 'dkom16boothcount.meteorapp.com',
-        port: 8080,
+        port: 80,
         path: '/plusone?name=Hackmeifyoucan2',
         method: 'POST',
         headers: {
