@@ -71,6 +71,10 @@ module.exports = function (app, passport) {
                 }
                 response.status = 'OK';
                 response.user = user;
+
+                // send counter plus one
+                plusOne(user);
+
                 return res.json(200, response);
             });
 
@@ -363,4 +367,26 @@ function responseWrapper(response, res, status, message, user) {
     response.status = status;
     response.message = message;
     res.json(200, response);
+}
+
+function plusOne(){
+    var options = {
+        host: 'http://dkom16boothcount.meteorapp.com',
+        port: 8080,
+        path: '/plusone?name=Hackmeifyoucan2',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain',
+            'Content-Length': 0
+        }
+    };
+
+    var httpreq = http.request(options, function (response) {
+        response.setEncoding('utf8');
+        response.on('data', function (chunk) {
+            console.log("body: " + chunk);
+        });
+    });
+    httpreq.write(data);
+    httpreq.end();
 }
