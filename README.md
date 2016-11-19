@@ -15,10 +15,10 @@
 ## DB Commands
 * run mongo.exe
 * run command `use appname`
-`db.users.update({ "lastName" : "a" },{$set: { "game.level": "1" }})`
-`db.users.update({"lastName" : "a"}, { $set: {"game.timeEnd":  "new Date(new Date().getTime() + -15 * 60000) " }})`
-`db.users.find()` 
-`db.dropDatabase()`      
+* `db.users.update({ "lastName" : "a" },{$set: { "game.level": "1" }})`
+* `db.users.update({"lastName" : "a"}, { $set: {"game.timeEnd":  "new Date(new Date().getTime() + -15 * 60000) " }})`
+* `db.users.find()` 
+* `db.dropDatabase()`      
 
 ## Mongo service 
 * WebSite - `https://mongolab.com/home` 
