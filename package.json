@@ -4,8 +4,7 @@
   "description": "A security fun challange for the SAP DKOM at Israel, 2016.",
   "keywords": [
     "security",
-    "sap",
-    "heroku"
+    "sap"
   ],
   "author": "keinang",
   "engines": {
