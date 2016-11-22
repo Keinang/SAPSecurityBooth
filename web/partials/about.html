@@ -124,21 +124,21 @@
             result.highlightPadding = new primitives.common.Thickness(2, 2, 2, 2);
 
             var itemTemplate = jQuery(
-                    '<div class="bp-item bp-corner-all bt-item-frame">'
-                    + '<div name="titleBackground" class="bp-item bp-corner-all bp-title-frame" style="top: 2px; left: 2px; width: 216px; height: 20px;">'
-                    + '<div name="title" class="bp-item bp-title" style="top: 3px; left: 6px; width: 208px; height: 18px;">'
-                    + '</div>'
-                    + '</div>'
-                    + '<div class="bp-item bp-photo-frame" style="top: 26px; left: 2px; width: 150px; height: 150px;">'
-                    + '<img name="photo" style="height:150px; width:150px;" />'
-                    + '</div>'
-                    + '<div name="email" class="bp-item" style="top: 44px; left: 156px; width: 162px; height: 18px; font-size: 16px;"></div>'
-                    + '<div name="description" class="bp-item" style="top: 62px; left: 156px; width: 162px; height: 36px; font-size: 14px;"></div>'
-                    + '</div>'
+                '<div class="bp-item bp-corner-all bt-item-frame">'
+                + '<div name="titleBackground" class="bp-item bp-corner-all bp-title-frame" style="top: 2px; left: 2px; width: 216px; height: 20px;">'
+                + '<div name="title" class="bp-item bp-title" style="top: 3px; left: 6px; width: 208px; height: 18px;">'
+                + '</div>'
+                + '</div>'
+                + '<div class="bp-item bp-photo-frame" style="top: 26px; left: 2px; width: 150px; height: 150px;">'
+                + '<img name="photo" style="height:150px; width:150px;" />'
+                + '</div>'
+                + '<div name="email" class="bp-item" style="top: 44px; left: 156px; width: 162px; height: 18px; font-size: 16px;"></div>'
+                + '<div name="description" class="bp-item" style="top: 62px; left: 156px; width: 162px; height: 36px; font-size: 14px;"></div>'
+                + '</div>'
             ).css({
-                        width: result.itemSize.width + "px",
-                        height: result.itemSize.height + "px"
-                    }).addClass("bp-item bp-corner-all bt-item-frame");
+                width: result.itemSize.width + "px",
+                height: result.itemSize.height + "px"
+            }).addClass("bp-item bp-corner-all bt-item-frame");
             result.itemTemplate = itemTemplate.wrap('<div>').parent().html();
             return result;
         }

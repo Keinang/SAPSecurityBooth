@@ -7,10 +7,9 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var configDB = require('./config/database.js');
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(process.env.MONGOLAB_URI || 'localhost:27017'); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 

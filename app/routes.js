@@ -22,9 +22,9 @@ module.exports = function (app, passport) {
     };
 
     var Hints = {
-        '1': ['Change the HTML to remove onmouseover and any button style','Did you check to whom the forgotten password question was sent?', 'Use social engineering knowledge to discover the password.', 'Did you read Hasso\'s wikipedia page?'],
+        '1': ['Change the HTML to remove onmouseover and any button style', 'Did you check to whom the forgotten password question was sent?', 'Use social engineering knowledge to discover the password.', 'Did you read Hasso\'s wikipedia page?'],
         '2': ['Did you try to select all content in the page?'],
-        '3': ['https://www.base64decode.org/','Can you understand the encryption method?', 'Try to decode it and find the biggest value.', 'base64 would be useful here.'],
+        '3': ['https://www.base64decode.org/', 'Can you understand the encryption method?', 'Try to decode it and find the biggest value.', 'base64 would be useful here.'],
         '4': ['If you post it...It will come....', 'Try to tamper with the data as needed.'],
         '5': ['What is common to Oreo, chocolate chips and what grandmothers give to their grandsons?', 'Can you change the value of the cookie?', 'The cookie key is isAdmin']
     };
@@ -249,8 +249,8 @@ module.exports = function (app, passport) {
                 response.status = 'OK';
                 response.message = 'You transferred 1M$! Enter the confirmation key to proceed to level 5...';
                 //response.confirmationKey = Answers['4'];
-				response.confirmationToken = true;
-				response.confKey = 'Your confirmation key is:' + Answers['4'];
+                response.confirmationToken = true;
+                response.confKey = 'Your confirmation key is:' + Answers['4'];
                 return res.json(200, response);
             } else {
                 // wrong money
@@ -374,7 +374,7 @@ function responseWrapper(response, res, status, message, user) {
     res.json(200, response);
 }
 
-function plusOne(){
+function plusOne() {
     var http = require('http');
     var options = {
         host: 'dkom16boothcount.meteorapp.com',

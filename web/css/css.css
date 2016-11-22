@@ -2,7 +2,8 @@
     width: 100px;
     height: 100px;
 }
-#navi, 
+
+#navi,
 #infoi {
     width: 100%;
     height: 100%;
@@ -16,20 +17,21 @@
 }
 
 .svg-container {
-  padding-bottom:67.3205033%;
-  position:relative
-}
-.svg-container__content {
-  position:absolute;
-  width:100%;
-  height:100%;
-  overflow:hidden
-}
-.svg-container__content svg {
-  width:100%;
-  height:100%
+    padding-bottom: 67.3205033%;
+    position: relative
 }
 
+.svg-container__content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden
+}
+
+.svg-container__content svg {
+    width: 100%;
+    height: 100%
+}
 
 /* Pen for http://blog.legomushroom.com/2014/03/defining-advanced-animation-path/ */
 
@@ -43,27 +45,27 @@
     -webkit-box-sizing: border-box;
 }
 
-body,html {
-    min-height:100%;
+body, html {
+    min-height: 100%;
 }
 
-body{
-    background:#444;
+body {
+    background: #444;
 }
 
 .leaderboard {
-    position:relative;
-    width:70%;
-    height:70%;
+    position: relative;
+    width: 70%;
+    height: 70%;
     margin: 30px auto 0 auto;
-    padding:3%;
+    padding: 3%;
 }
 
-.leaderboard h1{
+.leaderboard h1 {
     text-align: center;
     text-transform: uppercase;
-    margin:30px;
-    padding:0;
+    margin: 30px;
+    padding: 0;
     color: #cc7713;
 }
 
@@ -75,46 +77,48 @@ body{
     top: 110px;
     left: 50px;
     z-index: 9999;
-    min-width:300px;
+    min-width: 300px;
 }
 
-.content ul{
-    margin:0;
-    padding:0;
+.content ul {
+    margin: 0;
+    padding: 0;
     list-style: none;
-    border:5px solid #CCC;
-    background: rgba(40,40,40,0.35);
+    border: 5px solid #CCC;
+    background: rgba(40, 40, 40, 0.35);
 }
-.content ul li{
+
+.content ul li {
     position: relative;
-    color:#FFF;
+    color: #FFF;
     font-family: helvetica;
-    padding:2% 5%;
+    padding: 2% 5%;
     border-bottom: 1px solid #555;
 }
 
-.content ul li:last-child{
-    border-bottom:none;
+.content ul li:last-child {
+    border-bottom: none;
 }
 
-.name{
-    font-weight:bold;	
-}
-.count{
-    display:inline-block;
-    float:right;
-    color:#F00;
-    font-weight:bold;
-}
-.count:after{
-    color:#CCC;
-    font-size:80%;
-    font-weight:normal;
+.name {
+    font-weight: bold;
 }
 
+.count {
+    display: inline-block;
+    float: right;
+    color: #F00;
+    font-weight: bold;
+}
+
+.count:after {
+    color: #CCC;
+    font-size: 80%;
+    font-weight: normal;
+}
 
 /********* BLING **********/
-.content ul{
+.content ul {
     border-radius: 20px;
 }
 
@@ -124,44 +128,85 @@ body{
     animation: flashIt 0.2s ease 1;
 }
 
-.animate .countold{
+.animate .countold {
     -moz-animation: spinIt 0.3s ease 1;
     -webkit-animation: spinIt 0.3s ease 1;
     animation: spinIt 0.3s ease 1;
 }
 
-
 @-moz-keyframes flashIt {
-    100% { opacity: 0; background-color: #FFF;}
+    100% {
+        opacity: 0;
+        background-color: #FFF;
+    }
 }
+
 @-webkit-keyframes flashIt {
-    100% { opacity: 0; background-color: #FFF;}
+    100% {
+        opacity: 0;
+        background-color: #FFF;
+    }
 }
+
 @keyframes flashIt {
-    100% { opacity: 0; }
+    100% {
+        opacity: 0;
+    }
 }
 
 @-moz-keyframes spinIt {
-    20% {-moz-transform: rotate(-10deg)}
-    40% {-moz-transform: rotate(10deg)}
-    60% {-moz-transform: rotate(-10deg)}
-    80% {-moz-transform: rotate(10deg)}
-    100% {-moz-transform: rotate(-10deg)}
+    20% {
+        -moz-transform: rotate(-10deg)
+    }
+    40% {
+        -moz-transform: rotate(10deg)
+    }
+    60% {
+        -moz-transform: rotate(-10deg)
+    }
+    80% {
+        -moz-transform: rotate(10deg)
+    }
+    100% {
+        -moz-transform: rotate(-10deg)
+    }
 }
+
 @-webkit-keyframes spinIt {
-    20% {-webkit-transform: rotate(-10deg)}
-    40% {-webkit-transform: rotate(10deg)}
-    60% {-webkit-transform: rotate(-10deg)}
-    80% {-webkit-transform: rotate(10deg)}
-    100% {-webkit-transform: rotate(-10deg)}
+    20% {
+        -webkit-transform: rotate(-10deg)
+    }
+    40% {
+        -webkit-transform: rotate(10deg)
+    }
+    60% {
+        -webkit-transform: rotate(-10deg)
+    }
+    80% {
+        -webkit-transform: rotate(10deg)
+    }
+    100% {
+        -webkit-transform: rotate(-10deg)
+    }
 }
+
 @keyframes spinIt {
-     20% {transform: rotate(-10deg)}
-     40% {transform: rotate(10deg)}
-     60% {transform: rotate(-10deg)}
-     80% {transform: rotate(10deg)}
-     100% {transform: rotate(-10deg)}
- }
+    20% {
+        transform: rotate(-10deg)
+    }
+    40% {
+        transform: rotate(10deg)
+    }
+    60% {
+        transform: rotate(-10deg)
+    }
+    80% {
+        transform: rotate(10deg)
+    }
+    100% {
+        transform: rotate(-10deg)
+    }
+}
 
 /* CSS - Shea Parker */
 
@@ -172,63 +217,64 @@ body{
     -webkit-box-sizing: border-box;
 }
 
-body,html {
-    min-height:100%;
+body, html {
+    min-height: 100%;
 }
 
-body{
-    background:#444;
+body {
+    background: #444;
 }
 
 .leaderboard {
-    position:relative;
-    width:70%;
-    height:70%;
-    max-width:960px;
-    min-width:400px;
-    min-height:600px;
+    position: relative;
+    width: 70%;
+    height: 70%;
+    max-width: 960px;
+    min-width: 400px;
+    min-height: 600px;
     margin: 30px auto 0 auto;
-    padding:3%;
+    padding: 3%;
 }
 
-.leaderboard h1{
+.leaderboard h1 {
     text-align: center;
     text-transform: uppercase;
-    margin:30px;
-    padding:0;
+    margin: 30px;
+    padding: 0;
     color: #cc7713;
 }
 
-
-.content ul li{
+.content ul li {
     position: relative;
-    color:#FFF;
+    color: #FFF;
     font-family: helvetica;
-    padding:2% 5%;
+    padding: 2% 5%;
     border-bottom: 1px solid #555;
 }
 
-.content ul li:last-child{
-    border-bottom:none;
+.content ul li:last-child {
+    border-bottom: none;
 }
 
-.name{
-    font-weight:bold;
+.name {
+    font-weight: bold;
 }
-.count{
-    display:inline-block;
-    float:right;
-    color:#F00;
-    font-weight:bold;
+
+.count {
+    display: inline-block;
+    float: right;
+    color: #F00;
+    font-weight: bold;
 }
-.count:after{
-    color:#CCC;
-    font-size:80%;
-    font-weight:normal;
+
+.count:after {
+    color: #CCC;
+    font-size: 80%;
+    font-weight: normal;
 }
 
 /********* BLING **********/
-.content ul{
+.content ul {
     border-radius: 20px;
 }
 
@@ -238,47 +284,97 @@ body{
     animation: flashIt 0.2s ease 1;
 }
 
-.animate .countold{
+.animate .countold {
     -moz-animation: spinIt 0.3s ease 1;
     -webkit-animation: spinIt 0.3s ease 1;
     animation: spinIt 0.3s ease 1;
 }
 
-
 @-moz-keyframes flashIt {
-    100% { opacity: 0; background-color: #FFF;}
+    100% {
+        opacity: 0;
+        background-color: #FFF;
+    }
 }
+
 @-webkit-keyframes flashIt {
-    100% { opacity: 0; background-color: #FFF;}
+    100% {
+        opacity: 0;
+        background-color: #FFF;
+    }
 }
+
 @keyframes flashIt {
-    100% { opacity: 0; }
+    100% {
+        opacity: 0;
+    }
 }
 
 @-moz-keyframes spinIt {
-    20% {-moz-transform: rotate(-10deg)}
-    40% {-moz-transform: rotate(10deg)}
-    60% {-moz-transform: rotate(-10deg)}
-    80% {-moz-transform: rotate(10deg)}
-    100% {-moz-transform: rotate(-10deg)}
+    20% {
+        -moz-transform: rotate(-10deg)
+    }
+    40% {
+        -moz-transform: rotate(10deg)
+    }
+    60% {
+        -moz-transform: rotate(-10deg)
+    }
+    80% {
+        -moz-transform: rotate(10deg)
+    }
+    100% {
+        -moz-transform: rotate(-10deg)
+    }
 }
+
 @-webkit-keyframes spinIt {
-    20% {-webkit-transform: rotate(-10deg)}
-    40% {-webkit-transform: rotate(10deg)}
-    60% {-webkit-transform: rotate(-10deg)}
-    80% {-webkit-transform: rotate(10deg)}
-    100% {-webkit-transform: rotate(-10deg)}
+    20% {
+        -webkit-transform: rotate(-10deg)
+    }
+    40% {
+        -webkit-transform: rotate(10deg)
+    }
+    60% {
+        -webkit-transform: rotate(-10deg)
+    }
+    80% {
+        -webkit-transform: rotate(10deg)
+    }
+    100% {
+        -webkit-transform: rotate(-10deg)
+    }
 }
+
 @keyframes spinIt {
-    20% {transform: rotate(-10deg)}
-    40% {transform: rotate(10deg)}
-    60% {transform: rotate(-10deg)}
-    80% {transform: rotate(10deg)}
-    100% {transform: rotate(-10deg)}
+    20% {
+        transform: rotate(-10deg)
+    }
+    40% {
+        transform: rotate(10deg)
+    }
+    60% {
+        transform: rotate(-10deg)
+    }
+    80% {
+        transform: rotate(10deg)
+    }
+    100% {
+        transform: rotate(-10deg)
+    }
 }
 
 /*basic reset*/
-* {margin: 0; padding: 0;}
+* {
+    margin: 0;
+    padding: 0;
+}
+
 /*adding a black bg to the body to make things clearer*/
-body {background: black;}
-canvas {display: block;}
+body {
+    background: black;
+}
+
+canvas {
+    display: block;
+}

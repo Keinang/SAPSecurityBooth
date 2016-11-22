@@ -10,21 +10,23 @@ body {
     overflow-x: hidden;
 }
 
-
-.fading-img{
-	position: absolute;
-	z-index: 51;
-	margin: auto;
-  	top: 0; left: 0; bottom: 0; right: 0;
+.fading-img {
+    position: absolute;
+    z-index: 51;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
-.fading-img.ng-show-remove{
-	opacity: 0 !important;
+.fading-img.ng-show-remove {
+    opacity: 0 !important;
     transition: all linear 1s;
-	-webkit-transition:all linear 1s;
-  	-moz-transition:all linear 1s;
-  	-o-transition:all linear 1s;
-  	/*display: block !important;*/
+    -webkit-transition: all linear 1s;
+    -moz-transition: all linear 1s;
+    -o-transition: all linear 1s;
+    /*display: block !important;*/
 }
 
 .whiteBackground {
@@ -211,8 +213,8 @@ body {
     height: 294px;
 }
 
-.mouse-invisible{
-    cursor:crosshair;
+.mouse-invisible {
+    cursor: crosshair;
 }
 
 .header_bankhack h1 {
