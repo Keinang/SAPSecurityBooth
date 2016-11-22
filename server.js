@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 // configuration ===============================================================
-mongoose.connect(process.env.MONGOLAB_URI || 'localhost:27017'); // connect to our database
+mongoose.connect(process.env.MONGODB_URI || 'localhost:27017'); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
