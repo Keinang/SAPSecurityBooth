@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.4.14
+ * @license AngularJS v1.4.0
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -22,7 +22,8 @@
      * <div doc-module-components="ngRoute"></div>
      */
     /* global -ngRouteModule */
-    var ngRouteModule = angular.module('ngRoute', ['ng']).provider('$route', $RouteProvider),
+    var ngRouteModule = angular.module('ngRoute', ['ng']).
+            provider('$route', $RouteProvider),
         $routeMinErr = angular.$$minErr('ngRoute');
 
     /**
@@ -206,9 +207,9 @@
 
             path = path
                 .replace(/([().])/g, '\\$1')
-                .replace(/(\/)?:(\w+)(\*\?|[\?\*])?/g, function (_, slash, key, option) {
-                    var optional = (option === '?' || option === '*?') ? '?' : null;
-                    var star = (option === '*' || option === '*?') ? '*' : null;
+                .replace(/(\/)?:(\w+)([\?\*])?/g, function (_, slash, key, option) {
+                    var optional = option === '?' ? option : null;
+                    var star = option === '*' ? option : null;
                     keys.push({name: key, optional: !!optional});
                     slash = slash || '';
                     return ''
@@ -412,9 +413,7 @@
                  * @name $route#$routeChangeSuccess
                  * @eventType broadcast on root scope
                  * @description
-                 * Broadcasted after a route change has happened successfully.
-                 * The `resolve` dependencies are now available in the `current.locals` property.
-                 *
+                 * Broadcasted after a route dependencies are resolved.
                  * {@link ngRoute.directive:ngView ngView} listens for the directive
                  * to instantiate the controller and render the view.
                  *
@@ -468,18 +467,10 @@
                          */
                         reload: function () {
                             forceReload = true;
-
-                            var fakeLocationEvent = {
-                                defaultPrevented: false,
-                                preventDefault: function fakePreventDefault() {
-                                    this.defaultPrevented = true;
-                                    forceReload = false;
-                                }
-                            };
-
                             $rootScope.$evalAsync(function () {
-                                prepareRoute(fakeLocationEvent);
-                                if (!fakeLocationEvent.defaultPrevented) commitRoute();
+                                // Don't support cancellation of a reload for now...
+                                prepareRoute();
+                                commitRoute();
                             });
                         },
 
@@ -587,48 +578,51 @@
                             }
                         }
 
-                        $q.when(nextRoute).then(function () {
-                            if (nextRoute) {
-                                var locals = angular.extend({}, nextRoute.resolve),
-                                    template, templateUrl;
-
-                                angular.forEach(locals, function (value, key) {
-                                    locals[key] = angular.isString(value) ?
-                                        $injector.get(value) : $injector.invoke(value, null, null, key);
-                                });
-
-                                if (angular.isDefined(template = nextRoute.template)) {
-                                    if (angular.isFunction(template)) {
-                                        template = template(nextRoute.params);
-                                    }
-                                } else if (angular.isDefined(templateUrl = nextRoute.templateUrl)) {
-                                    if (angular.isFunction(templateUrl)) {
-                                        templateUrl = templateUrl(nextRoute.params);
-                                    }
-                                    if (angular.isDefined(templateUrl)) {
-                                        nextRoute.loadedTemplateUrl = $sce.valueOf(templateUrl);
-                                        template = $templateRequest(templateUrl);
-                                    }
-                                }
-                                if (angular.isDefined(template)) {
-                                    locals['$template'] = template;
-                                }
-                                return $q.all(locals);
-                            }
-                        }).then(function (locals) {
-                            // after route change
-                            if (nextRoute == $route.current) {
+                        $q.when(nextRoute).
+                            then(function () {
                                 if (nextRoute) {
-                                    nextRoute.locals = locals;
-                                    angular.copy(nextRoute.params, $routeParams);
+                                    var locals = angular.extend({}, nextRoute.resolve),
+                                        template, templateUrl;
+
+                                    angular.forEach(locals, function (value, key) {
+                                        locals[key] = angular.isString(value) ?
+                                            $injector.get(value) : $injector.invoke(value, null, null, key);
+                                    });
+
+                                    if (angular.isDefined(template = nextRoute.template)) {
+                                        if (angular.isFunction(template)) {
+                                            template = template(nextRoute.params);
+                                        }
+                                    } else if (angular.isDefined(templateUrl = nextRoute.templateUrl)) {
+                                        if (angular.isFunction(templateUrl)) {
+                                            templateUrl = templateUrl(nextRoute.params);
+                                        }
+                                        templateUrl = $sce.getTrustedResourceUrl(templateUrl);
+                                        if (angular.isDefined(templateUrl)) {
+                                            nextRoute.loadedTemplateUrl = templateUrl;
+                                            template = $templateRequest(templateUrl);
+                                        }
+                                    }
+                                    if (angular.isDefined(template)) {
+                                        locals['$template'] = template;
+                                    }
+                                    return $q.all(locals);
                                 }
-                                $rootScope.$broadcast('$routeChangeSuccess', nextRoute, lastRoute);
-                            }
-                        }, function (error) {
-                            if (nextRoute == $route.current) {
-                                $rootScope.$broadcast('$routeChangeError', nextRoute, lastRoute, error);
-                            }
-                        });
+                            }).
+                            then(function (locals) {
+                                // after route change
+                                if (nextRoute == $route.current) {
+                                    if (nextRoute) {
+                                        nextRoute.locals = locals;
+                                        angular.copy(nextRoute.params, $routeParams);
+                                    }
+                                    $rootScope.$broadcast('$routeChangeSuccess', nextRoute, lastRoute);
+                                }
+                            }, function (error) {
+                                if (nextRoute == $route.current) {
+                                    $rootScope.$broadcast('$routeChangeError', nextRoute, lastRoute, error);
+                                }
+                            });
                     }
                 }
 
@@ -805,6 +799,7 @@
         }
 
      .view-animate.ng-enter, .view-animate.ng-leave {
+          -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
           transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
 
           display:block;

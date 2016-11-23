@@ -217,9 +217,7 @@ angular.module('appname.controllers', ['ngAnimate'])
             $scope.users = result.users;
 
             var answerInputDiv = angular.element(document.querySelector('.content'));
-            if (answerInputDiv) {
-                new Leaderboard(answerInputDiv[0], {limit: 8, frequency: 8});
-            }
+            new Leaderboard(answerInputDiv[0], {limit: 8, frequency: 8});
         });
     }])
     .controller('gameCtrl', ['$scope', '$timeout', 'logoutService', 'gameService', 'toastr', '$rootScope', function ($scope, $timeout, logoutService, gameService, toastr, $rootScope) {
@@ -234,9 +232,7 @@ angular.module('appname.controllers', ['ngAnimate'])
 
                     // Reset answer:
                     var answerInputDiv = angular.element(document.querySelector('#answerInput'));
-                    if (answerInputDiv && answerInputDiv[0]) {
-                        answerInputDiv[0].value = '';
-                    }
+                    answerInputDiv[0].value = '';
 
                     // Re-render time:
                     if (reRenderDigits) {
@@ -251,7 +247,7 @@ angular.module('appname.controllers', ['ngAnimate'])
         $scope.submitAnswer = function () {
             var answerInputDiv = angular.element(document.querySelector('#answerInput'));
             var data = {
-                answer: answerInputDiv ? answerInputDiv[0].value : ''
+                answer: answerInputDiv[0].value
             };
             gameService.submitAnswer(data).then(function (result) {
                 if (result.status === 'OK') {

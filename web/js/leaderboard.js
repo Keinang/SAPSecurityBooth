@@ -191,80 +191,80 @@
             this.cloud1Tween = new TWEEN.Tween({
                 left: cloudStart
             }).to({
-                left: cloudEnd
-            }, time).onUpdate(function () {
-                //return cloud1.setAttribute('transform', "translate(" + this.left + ")");
-            }).repeat(9999999).start({
-                progress: .65
-            });
+                    left: cloudEnd
+                }, time).onUpdate(function () {
+                    //return cloud1.setAttribute('transform', "translate(" + this.left + ")");
+                }).repeat(9999999).start({
+                    progress: .65
+                });
             this.cloud11Tween = new TWEEN.Tween({
                 left: cloudStart
             }).to({
-                left: cloudEnd
-            }, time).onUpdate(function () {
-                //return cloud11.setAttribute('transform', "translate(" + this.left + ")");
-            }).repeat(9999999).delay(time / 2).start({
-                progress: .65
-            });
+                    left: cloudEnd
+                }, time).onUpdate(function () {
+                    //return cloud11.setAttribute('transform', "translate(" + this.left + ")");
+                }).repeat(9999999).delay(time / 2).start({
+                    progress: .65
+                });
             cloud2 = document.getElementById('js-cloud2');
             cloud21 = document.getElementById('js-cloud21');
             time = 75000;
             this.cloud2Tween = new TWEEN.Tween({
                 left: cloudStart
             }).to({
-                left: cloudEnd
-            }, time).onUpdate(function () {
-                //return cloud2.setAttribute('transform', "translate(" + this.left + ")");
-            }).repeat(9999999).start({
-                progress: .25
-            });
+                    left: cloudEnd
+                }, time).onUpdate(function () {
+                    //return cloud2.setAttribute('transform', "translate(" + this.left + ")");
+                }).repeat(9999999).start({
+                    progress: .25
+                });
             this.cloud21Tween = new TWEEN.Tween({
                 left: cloudStart
             }).to({
-                left: cloudEnd
-            }, time).onUpdate(function () {
-                //return cloud21.setAttribute('transform', "translate(" + this.left + ")");
-            }).repeat(9999999).delay(time / 2).start({
-                progress: .25
-            });
+                    left: cloudEnd
+                }, time).onUpdate(function () {
+                    //return cloud21.setAttribute('transform', "translate(" + this.left + ")");
+                }).repeat(9999999).delay(time / 2).start({
+                    progress: .25
+                });
             cloud3 = document.getElementById('js-cloud3');
             cloud31 = document.getElementById('js-cloud31');
             time = 100000;
             this.cloud3Tween = new TWEEN.Tween({
                 left: cloudStart
             }).to({
-                left: cloudEnd
-            }, time).onUpdate(function () {
-                //return cloud3.setAttribute('transform', "translate(" + this.left + ")");
-            }).repeat(9999999).start({
-                progress: .75
-            });
+                    left: cloudEnd
+                }, time).onUpdate(function () {
+                    //return cloud3.setAttribute('transform', "translate(" + this.left + ")");
+                }).repeat(9999999).start({
+                    progress: .75
+                });
             this.cloud31Tween = new TWEEN.Tween({
                 left: cloudStart
             }).to({
-                left: cloudEnd
-            }, time).onUpdate(function () {
-                //return cloud31.setAttribute('transform', "translate(" + this.left + ")");
-            }).repeat(9999999).delay(time / 2).start({
-                progress: .75
-            });
+                    left: cloudEnd
+                }, time).onUpdate(function () {
+                    //return cloud31.setAttribute('transform', "translate(" + this.left + ")");
+                }).repeat(9999999).delay(time / 2).start({
+                    progress: .75
+                });
             cloud4 = document.getElementById('js-cloud4');
             cloud41 = document.getElementById('js-cloud41');
             time = 110000;
             this.cloud4Tween = new TWEEN.Tween({
                 left: cloudStart
             }).to({
-                left: cloudEnd
-            }, time).onUpdate(function () {
-                //return cloud4.setAttribute('transform', "translate(" + this.left + ")");
-            }).repeat(9999999).start();
+                    left: cloudEnd
+                }, time).onUpdate(function () {
+                    //return cloud4.setAttribute('transform', "translate(" + this.left + ")");
+                }).repeat(9999999).start();
             return this.cloud41Tween = new TWEEN.Tween({
                 left: cloudStart
             }).to({
-                left: cloudEnd
-            }, time).onUpdate(function () {
-                //return cloud41.setAttribute('transform', "translate(" + this.left + ")");
-            }).repeat(9999999).delay(time / 2).start();
+                    left: cloudEnd
+                }, time).onUpdate(function () {
+                    //return cloud41.setAttribute('transform', "translate(" + this.left + ")");
+                }).repeat(9999999).delay(time / 2).start();
         };
 
         Main.prototype.launchTrains = function () {
@@ -273,75 +273,75 @@
             this.train1Tween = new TWEEN.Tween({
                 length: this.train1.path.getTotalLength()
             }).to({
-                length: 0
-            }, 8000).onUpdate(function () {
-                var angle, attr, cabin, cabinChild, i, point, prevPoint, shift, x, x1, x2, y, _i, _len, _ref, _results;
-                _ref = it.train1.cabins;
-                _results = [];
-                for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-                    cabin = _ref[i];
-                    shift = i * it.cabinWidth;
-                    point = it.train1.path.getPointAtLength(this.length - shift);
-                    prevPoint = it.train1.path.getPointAtLength(this.length - shift - 1);
-                    x1 = point.y - prevPoint.y;
-                    x2 = point.x - prevPoint.x;
-                    angle = Math.atan(x1 / x2) * (180 / Math.PI);
-                    x = point.x - 30;
-                    y = point.y - 54;
-                    if (point.x - prevPoint.x > 0) {
-                        if (!cabin.isRotated) {
-                            cabinChild = cabin[it.childMethod][it.childNode];
-                            cabinChild.setAttribute('xlink:href', '#cabin2');
-                            cabin.isRotated = true;
+                    length: 0
+                }, 8000).onUpdate(function () {
+                    var angle, attr, cabin, cabinChild, i, point, prevPoint, shift, x, x1, x2, y, _i, _len, _ref, _results;
+                    _ref = it.train1.cabins;
+                    _results = [];
+                    for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+                        cabin = _ref[i];
+                        shift = i * it.cabinWidth;
+                        point = it.train1.path.getPointAtLength(this.length - shift);
+                        prevPoint = it.train1.path.getPointAtLength(this.length - shift - 1);
+                        x1 = point.y - prevPoint.y;
+                        x2 = point.x - prevPoint.x;
+                        angle = Math.atan(x1 / x2) * (180 / Math.PI);
+                        x = point.x - 30;
+                        y = point.y - 54;
+                        if (point.x - prevPoint.x > 0) {
+                            if (!cabin.isRotated) {
+                                cabinChild = cabin[it.childMethod][it.childNode];
+                                cabinChild.setAttribute('xlink:href', '#cabin2');
+                                cabin.isRotated = true;
+                            }
+                        } else {
+                            if (cabin.isRotated) {
+                                cabinChild = cabin[it.childMethod][it.childNode];
+                                cabinChild.setAttribute('xlink:href', '#cabin1');
+                                cabin.isRotated = false;
+                            }
                         }
-                    } else {
-                        if (cabin.isRotated) {
-                            cabinChild = cabin[it.childMethod][it.childNode];
-                            cabinChild.setAttribute('xlink:href', '#cabin1');
-                            cabin.isRotated = false;
-                        }
+                        attr = "translate(" + x + ", " + y + ") rotate(" + (angle || 0) + ",38,23)";
+                        _results.push(cabin.setAttribute('transform', attr));
                     }
-                    attr = "translate(" + x + ", " + y + ") rotate(" + (angle || 0) + ",38,23)";
-                    _results.push(cabin.setAttribute('transform', attr));
-                }
-                return _results;
-            }).repeat(999999999999).start();
+                    return _results;
+                }).repeat(999999999999).start();
             return this.train2Tween = new TWEEN.Tween({
                 length: this.train2.path.getTotalLength()
             }).to({
-                length: 0
-            }, 5000).onUpdate(function () {
-                var angle, attr, cabin, cabinChild, i, point, prevPoint, shift, x, x1, x2, y, _i, _len, _ref, _results;
-                _ref = it.train2.cabins;
-                _results = [];
-                for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-                    cabin = _ref[i];
-                    shift = i * it.cabinWidth;
-                    point = it.train2.path.getPointAtLength(this.length - shift);
-                    prevPoint = it.train2.path.getPointAtLength(this.length - shift - 1);
-                    x1 = point.y - prevPoint.y;
-                    x2 = point.x - prevPoint.x;
-                    angle = Math.atan(x1 / x2) * (180 / Math.PI);
-                    x = point.x - 50;
-                    y = point.y - 54;
-                    if (point.x - prevPoint.x > 0) {
-                        if (!cabin.isRotated) {
-                            cabinChild = cabin[it.childMethod][it.childNode];
-                            cabinChild.setAttribute('xlink:href', '#cabin2');
-                            cabin.isRotated = true;
+                    length: 0
+                }, 5000).onUpdate(function () {
+                    var angle, attr, cabin, cabinChild, i, point, prevPoint, shift, x, x1, x2, y, _i, _len, _ref, _results;
+                    _ref = it.train2.cabins;
+                    _results = [];
+                    for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+                        cabin = _ref[i];
+                        shift = i * it.cabinWidth;
+                        point = it.train2.path.getPointAtLength(this.length - shift);
+                        prevPoint = it.train2.path.getPointAtLength(this.length - shift - 1);
+                        x1 = point.y - prevPoint.y;
+                        x2 = point.x - prevPoint.x;
+                        angle = Math.atan(x1 / x2) * (180 / Math.PI);
+                        x = point.x - 50;
+                        y = point.y - 54;
+                        if (point.x - prevPoint.x > 0) {
+                            if (!cabin.isRotated) {
+                                cabinChild = cabin[it.childMethod][it.childNode];
+                                cabinChild.setAttribute('xlink:href', '#cabin2');
+                                cabin.isRotated = true;
+                            }
+                        } else {
+                            if (cabin.isRotated) {
+                                cabinChild = cabin[it.childMethod][it.childNode];
+                                cabinChild.setAttribute('xlink:href', '#cabin1');
+                                cabin.isRotated = false;
+                            }
                         }
-                    } else {
-                        if (cabin.isRotated) {
-                            cabinChild = cabin[it.childMethod][it.childNode];
-                            cabinChild.setAttribute('xlink:href', '#cabin1');
-                            cabin.isRotated = false;
-                        }
+                        attr = "translate(" + x + ", " + y + ") rotate(" + (angle || 0) + ",38,23)";
+                        _results.push(cabin.setAttribute('transform', attr));
                     }
-                    attr = "translate(" + x + ", " + y + ") rotate(" + (angle || 0) + ",38,23)";
-                    _results.push(cabin.setAttribute('transform', attr));
-                }
-                return _results;
-            }).repeat(999999999999).start();
+                    return _results;
+                }).repeat(999999999999).start();
         };
 
         Main.prototype.animate = function () {

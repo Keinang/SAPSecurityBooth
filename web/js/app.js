@@ -1,67 +1,70 @@
-angular.module('summerproject', ['ngRoute', 'ngResource', 'appname.controllers', 'appname.services', 'ngAnimate', 'toastr']).config(['$routeProvider', function ($routeProvider) {
-    'use strict';
-    $routeProvider.when('/login', {
-        title: 'Home',
-        templateUrl: 'partials/login.html',
-        controller: 'tempCtrl',
-        resolve: {loginRedirect: loginRedirect}
-    })
-        .when('/signup', {
-            title: 'Signup',
-            templateUrl: 'partials/signup.html',
-            controller: 'signupCtrl'
-        })
-        .when('/profile', {
-            title: 'Profile',
-            templateUrl: 'partials/profile.html',
-            controller: 'profileCtrl',
-            resolve: {logincheck: checkLogin}
-        })
-        .when('/game', {
-            title: 'Game',
-            templateUrl: 'partials/game.html',
-            controller: 'gameCtrl',
-            resolve: {logincheck: checkLogin}
-        })
-        .when('/leaderboard', {
-            title: 'Leaderboard',
-            templateUrl: 'partials/leaderboard.html',
-            controller: 'leaderboardCtrl'
-        })
-        .when('/leaderboard2', {
-            title: 'Leaderboard2',
-            templateUrl: 'partials/leaderboard2.html',
-            controller: 'leaderboard2Ctrl'
-        })
-        .when('/about', {
-            title: 'About',
-            templateUrl: 'partials/about.html',
-            controller: 'aboutCtrl'
-        })
-        .when('/help', {
-            title: 'Help',
-            templateUrl: 'partials/help.html',
-            controller: 'helpCtrl'
-        })
-        .otherwise({redirectTo: '/login'});
-}]).run(['$rootScope', '$q', '$http', function ($rootScope, $q, $http) {
+angular.module('summerproject', ['ngRoute', 'ngResource', 'appname.controllers', 'appname.services', 'ngAnimate', 'toastr']).
+    config(['$routeProvider', function ($routeProvider) {
+        'use strict';
+        $routeProvider.
+            when('/login', {
+                title: 'Home',
+                templateUrl: 'partials/login.html',
+                controller: 'tempCtrl',
+                resolve: {loginRedirect: loginRedirect}
+            })
+            .when('/signup', {
+                title: 'Signup',
+                templateUrl: 'partials/signup.html',
+                controller: 'signupCtrl'
+            })
+            .when('/profile', {
+                title: 'Profile',
+                templateUrl: 'partials/profile.html',
+                controller: 'profileCtrl',
+                resolve: {logincheck: checkLogin}
+            })
+            .when('/game', {
+                title: 'Game',
+                templateUrl: 'partials/game.html',
+                controller: 'gameCtrl',
+                resolve: {logincheck: checkLogin}
+            })
+            .when('/leaderboard', {
+                title: 'Leaderboard',
+                templateUrl: 'partials/leaderboard.html',
+                controller: 'leaderboardCtrl'
+            })
+            .when('/leaderboard2', {
+                title: 'Leaderboard2',
+                templateUrl: 'partials/leaderboard2.html',
+                controller: 'leaderboard2Ctrl'
+            })
+            .when('/about', {
+                title: 'About',
+                templateUrl: 'partials/about.html',
+                controller: 'aboutCtrl'
+            })
+            .when('/help', {
+                title: 'Help',
+                templateUrl: 'partials/help.html',
+                controller: 'helpCtrl'
+            })
+            .otherwise({redirectTo: '/signup'});
+    }]).
+    run(['$rootScope', '$q', '$http', function ($rootScope, $q, $http) {
 
-    var loginSetIntialData = function () {
+        var loginSetIntialData = function () {
 
-        $http.get('/api/loggedin').success(function (user) {
-            if (user != 0) {
-                $rootScope.currentUser = user;
-            }
-            //User is not Authenticated
-            else {
+            $http.get('/api/loggedin').success(function (user) {
+                if (user != 0) {
+                    $rootScope.currentUser = user;
+                }
+                //User is not Authenticated
+                else {
+                    $rootScope.currentUser = undefined;
+                }
+            }).error(function (result) {
                 $rootScope.currentUser = undefined;
-            }
-        }).error(function (result) {
-            $rootScope.currentUser = undefined;
-        });
-    }();
+            });
+        }();
 
-}]);
+    }]);
 
 var checkLogin = function ($q, $http, $location, $rootScope, toastr) {
     var deffered = $q.defer();

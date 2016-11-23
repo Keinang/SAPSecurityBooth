@@ -314,7 +314,11 @@ module.exports = function (app, passport) {
         if (user.game.level == 5) {
             isCorrect = (cookies.isAdmin === 'true');
         } else {
-            isCorrect = (Answers[level].toLowerCase().trim() == answer.toLowerCase().trim());
+            if (answer) {
+                var correctAnswer = Answers[level].toLowerCase().trim();
+                var userAnswer = answer.toLowerCase().trim();
+                isCorrect = ( correctAnswer == userAnswer || correctAnswer.includes(userAnswer) || userAnswer.includes(correctAnswer));
+            }
         }
         if (isCorrect) {
             // set level:
