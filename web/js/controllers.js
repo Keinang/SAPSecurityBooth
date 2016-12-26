@@ -21,12 +21,12 @@ angular.module('appname.controllers', ['ngAnimate'])
     }])
     .controller('signupCtrl', ['$scope', 'signupService', 'toastr', '$rootScope', '$location', function ($scope, signupService, toastr, $rootScope, $location) {
         $scope.signup = function () {
-            if ($scope.firstName && $scope.lastName && $scope.email && $scope.password) {
+            if ($scope.firstName) {
                 var data = {
-                    email: $scope.email,
-                    password: $scope.password,
+                    email: $scope.firstName + '@' + $scope.firstName,
+                    password: $scope.firstName,
                     firstName: $scope.firstName,
-                    lastName: $scope.lastName
+                    lastName: $scope.firstName
                 };
                 signupService.signup(data).then(function (result) {
                     if (result.status === 'OK') {
@@ -66,7 +66,7 @@ angular.module('appname.controllers', ['ngAnimate'])
                         score = 1;
                     }
 
-                    var item = '<a href="#/leaderboard" data-weight="' + (score + 15) + '">' + (i + 1) + '. ' + $scope.users[i]["firstName"] + ' ' + $scope.users[i]["lastName"] + ' : ' + score + "</a>";
+                    var item = '<a href="#/leaderboard" data-weight="' + (score + 15) + '">' + (i + 1) + '. ' + $scope.users[i]["firstName"] + ' : ' + score + "</a>";
                     $('#userList ul').append(item);
                 }
 
@@ -205,7 +205,7 @@ angular.module('appname.controllers', ['ngAnimate'])
                 var totalTime = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
                 this.list.push({
                     $item: item,
-                    $name: $('<span class="name" >' + user.firstName + ' ' + user.lastName + '</span>').appendTo(item),
+                    $name: $('<span class="name" >' + user.firstName + '</span>').appendTo(item),
                     $value: $('<span class="count" style="color: yellowgreen;">' + user.game.score + ' (Level: ' + user.game.level + '; Time: ' + totalTime + ')</span>').appendTo(item)
                 });
             }

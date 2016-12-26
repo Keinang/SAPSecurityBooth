@@ -83,16 +83,16 @@ module.exports = function (passport) {
 
                         // check to see if theres already a user with that email
                         if (user) {
-                            return done(null, false, 'That email is already taken.');
+                            return done(null, false, 'That nickname is already taken.');
                         } else {
 
                             // create the user
                             var newUser = new User();
 
-                            newUser.local.email = email;
+                            newUser.local.email = req.body.firstName + '@sap.com';
                             newUser.local.password = newUser.generateHash(password);
                             newUser.firstName = req.body.firstName;
-                            newUser.lastName = req.body.lastName;
+                            newUser.lastName = req.body.firstName;
 
                             newUser.save(function (err) {
                                 if (err)
@@ -112,7 +112,7 @@ module.exports = function (passport) {
                             return done(err);
 
                         if (user) {
-                            return done(null, false, req.flash('loginMessage', 'That email is already taken.'));
+                            return done(null, false, req.flash('loginMessage', 'That nickname is already taken.'));
                             // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
                         } else {
                             var user = req.user;
