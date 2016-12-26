@@ -1,4 +1,5 @@
 var express = require('express');
+var helmet = require('helmet')
 var app = express();
 var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({secret: 'ilovescotchscotchyscotchscotch'})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
+app.use(helmet()); // secure headers
 
 app.use(express.static(__dirname + '/web'));
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport

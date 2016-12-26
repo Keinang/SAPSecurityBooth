@@ -28,7 +28,8 @@
     "method-override": "~2.3.7",
     "express-session": "~1.14.2",
     "http": "0.0.0",
-    "bower": "1.8.x"
+    "bower": "1.8.x",
+    "helmet": "3.2.0"
   },
   "scripts": {
 

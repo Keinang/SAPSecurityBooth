@@ -22,7 +22,7 @@ module.exports = function (app, passport) {
     };
 
     var Hints = {
-        '1': ['Change the HTML to remove onmouseover and any button style', 'Did you check to whom the forgotten password question was sent?', 'Use social engineering knowledge to discover the password.', 'Did you read Hasso\'s wikipedia page?'],
+        '1': ['Change the HTML to remove the button style.', 'Did you check to whom the forgotten password question was sent?', 'Use social engineering knowledge to discover the password.', 'Did you read Hasso\'s wikipedia page?'],
         '2': ['Did you try to select all content in the page?'],
         '3': ['https://www.base64decode.org/', 'Can you understand the encryption method?', 'Try to decode it and find the biggest value.', 'base64 would be useful here.'],
         '4': ['If you post it...It will come....', 'Try to tamper with the data as needed.'],
