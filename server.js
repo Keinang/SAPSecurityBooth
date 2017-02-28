@@ -1,5 +1,5 @@
 var express = require('express');
-var helmet = require('helmet')
+var helmet = require('helmet');
 var app = express();
 var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');

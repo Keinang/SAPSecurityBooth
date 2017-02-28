@@ -198,8 +198,8 @@ angular.module('appname.controllers', ['ngAnimate'])
                 var diffMs = (new Date(user.game.timeUserFinished) - new Date(user.game.timeStart));
                 var minutes = Math.floor(diffMs / 60000);
                 var seconds = ((diffMs % 60000) / 1000).toFixed(0);
-                if (minutes >= 15) {
-                    minutes = 15;
+                if (minutes >= 20) {
+                    minutes = 20;
                     seconds = 0;
                 }
                 var totalTime = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
@@ -227,9 +227,6 @@ angular.module('appname.controllers', ['ngAnimate'])
                 $scope.user = result.user;
                 setUiHints($scope);
                 if (result.status === 'OK') {
-                    // Send usage analytics:
-                    ga('send', 'pageview', '/game' + result.user.game.level + '.html');
-
                     // Reset answer:
                     var answerInputDiv = angular.element(document.querySelector('#answerInput'));
                     answerInputDiv[0].value = '';
