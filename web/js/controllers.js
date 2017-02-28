@@ -227,9 +227,6 @@ angular.module('appname.controllers', ['ngAnimate'])
                 $scope.user = result.user;
                 setUiHints($scope);
                 if (result.status === 'OK') {
-                    // Send usage analytics:
-                    ga('send', 'pageview', '/game' + result.user.game.level + '.html');
-
                     // Reset answer:
                     var answerInputDiv = angular.element(document.querySelector('#answerInput'));
                     answerInputDiv[0].value = '';
