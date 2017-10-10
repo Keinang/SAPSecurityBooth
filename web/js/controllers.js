@@ -198,8 +198,8 @@ angular.module('appname.controllers', ['ngAnimate'])
                 var diffMs = (new Date(user.game.timeUserFinished) - new Date(user.game.timeStart));
                 var minutes = Math.floor(diffMs / 60000);
                 var seconds = ((diffMs % 60000) / 1000).toFixed(0);
-                if (minutes >= 15) {
-                    minutes = 15;
+                if (minutes >= 20) {
+                    minutes = 20;
                     seconds = 0;
                 }
                 var totalTime = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;

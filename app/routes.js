@@ -2,7 +2,7 @@ module.exports = function (app, passport) {
     var user = require('../app/models/user');
     var http = require('http');
 
-    var TIME_PLAY_IN_MINUTES = 15;
+    var TIME_PLAY_IN_MINUTES = 20;
     var ch4ExpectedMoney = 1000000;
     var ch4ExpectedAccount = 424242;
     var Answers = {
